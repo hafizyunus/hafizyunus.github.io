@@ -9,9 +9,11 @@
 - [x] Choose URL → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
 - [ ] Create GitHub repo `hafizyunus/hafizyunus.github.io` & push
 - [x] Confirm stack → Astro ([ADR 0001](decisions/0001-tech-stack.md))
-- [ ] Confirm content model → [ARCHITECTURE.md](ARCHITECTURE.md)
-- [ ] Answer [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md)
-- [ ] Gather content: resume, role write-ups, projects, photo, links
+- [x] Audience, tone, primary action → [BRIEF.md](BRIEF.md)
+- [ ] Confirm content model → [ARCHITECTURE.md](ARCHITECTURE.md) (after drafting from resume)
+- [ ] Answer remaining [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md)
+- [ ] Gather content: resume into `_inbox/` → Claude drafts content files → review
+- [ ] Gather project visuals (CAD renders, photos, drawings, plots)
 - [ ] Visual direction: 2–3 reference sites, colour/typography mood
 
 ## Phase 1 — MVP (runs locally, deployable once URL is chosen)

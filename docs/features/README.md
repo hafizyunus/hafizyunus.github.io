@@ -29,3 +29,15 @@ their own file in this folder (e.g. `blog.md`) when we start on it.
 | i18n | Low | L | 5 | |
 | CI quality checks | Med | S | 5 | Link check, Lighthouse CI |
 | Easter egg (terminal mode, Konami code) | Low | S | any | Personality |
+
+## Mechanical-engineering specific
+| Feature | Value | Effort | Phase | Notes |
+|---|---|---|---|---|
+| Project image gallery + lightbox | High | S | 2 | CAD renders, photos, plots with captions |
+| Engineering case-study template | High | S | 2 | Problem → requirements → concept → analysis → design → test → result |
+| Key-metrics callouts | High | S | 2 | e.g. "−18% mass", "FoS 2.5", "$40k/yr saved" |
+| Before/after image slider | Med | S | 2 | Design iterations, redesigns |
+| Interactive 3D model viewer | High | M | 4 | `<model-viewer>` with exported GLB files; rotate/zoom a part in the browser |
+| Embedded drawings / PDFs | Med | S | 2 | Selected technical drawings or reports |
+| Tools & methods matrix | Med | S | 1 | CAD / FEA / CFD / manufacturing / standards, linked to projects |
+| Credentials section | Med | S | 1 | Degree, EIT/PE, certifications, patents, publications |

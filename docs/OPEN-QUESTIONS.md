@@ -1,26 +1,23 @@
 # Open questions
 
-Answer inline; resolved items move to the relevant ADR or doc.
+Answer inline; resolved items are recorded in [BRIEF.md](BRIEF.md) or an ADR.
 
-## URL & hosting
-1. ~~Which URL option?~~ → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
-2. ~~GitHub username?~~ → `hafizyunus`
+## Resolved (2026-09-26)
+- ~~URL~~ → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
+- ~~GitHub username~~ → `hafizyunus`
+- ~~Stack~~ → Astro ([ADR 0001](decisions/0001-tech-stack.md))
+- ~~Audience~~ → Recruiters/hiring managers + engineering peers
+- ~~Primary action~~ → Explore work (projects); GitHub secondary
+- ~~Tone~~ → Friendly professional
+- ~~Blog~~ → Later (Phase 3)
+- ~~Contact~~ → Email + LinkedIn links
+- ~~Photo~~ → No photo
+- ~~Content source~~ → Resume in `_inbox/`, drafted by Claude, reviewed by owner
 
-## Audience & tone
-3. Who is the main audience — recruiters, hiring managers, clients, peers?
-4. What should a visitor do after reading — contact you, download resume, view GitHub?
-5. Tone: formal/corporate, friendly/personal, or playful?
-
-## Content
-6. Which roles/projects deserve full write-ups (detail pages)?
-7. Any confidential work that must be described vaguely or omitted?
-8. Do you want a blog at launch, later, or never?
-9. Photo on the site: yes/no?
-10. Show contact email publicly, or form only?
-
-## Design
-11. 2–3 sites whose look you like?
-12. Colour preferences / anything to avoid?
-
-## Stack
-13. ~~Astro?~~ → Yes, accepted ([ADR 0001](decisions/0001-tech-stack.md))
+## Still open
+1. **Visual references**: 2–3 sites whose look you like (and what you like about each).
+2. Colour preferences / anything to avoid?
+3. Which roles/projects deserve full write-ups (detail pages)? *(after resume draft)*
+4. Any confidential/NDA work to describe vaguely or omit? *(after resume draft)*
+5. Which project visuals do you have: CAD renders, photos, drawings, simulation plots? Any shareable?
+6. Credentials to highlight: EIT/PE (or equivalent), certifications, patents, publications?

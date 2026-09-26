@@ -1,3 +1,6 @@
+# private source material (raw resume, drafts) — never committed
+_inbox/
+
 # dependencies
 node_modules/
 
