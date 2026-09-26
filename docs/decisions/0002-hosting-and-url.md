@@ -1,13 +1,16 @@
 # ADR 0002 — Hosting & URL
 
-- **Status:** Hosting accepted · URL **undecided**
+- **Status:** Accepted (2026-09-26)
 - **Date:** 2026-09-26
 
 ## Decision
 - Host on **GitHub Pages**, deployed by a GitHub Actions workflow on every push to `main`.
-- Work **locally only** until the URL is chosen; the GitHub repo is created afterwards.
+- URL: **`https://hafizyunus.github.io`** (Option A, user site).
+  - GitHub repo name: `hafizyunus.github.io` under the `hafizyunus` account.
+  - `site.url: "https://hafizyunus.github.io"`, `site.basePath: ""`.
+- A custom domain (Option C) can be added later without changing the repo.
 
-## URL options (pick one)
+## URL options considered
 
 | Option | Example URL | GitHub repo name | Notes |
 |---|---|---|---|
@@ -25,4 +28,5 @@ Switching options later = edit that value (+ `CNAME` for a custom domain) and re
 ## Consequences
 - Static output only (no server code). Contact form / analytics must use third-party
   static-friendly services — see [features backlog](../features/README.md).
-- Local folder is currently named `hafizyunus.github.io`; rename freely if the choice differs — git doesn't depend on it.
+- Local folder name matches the repo name (`hafizyunus.github.io`).
+- Every page is a real HTML file (e.g. `/resume/index.html`), so deep links work on Pages without SPA 404 workarounds.

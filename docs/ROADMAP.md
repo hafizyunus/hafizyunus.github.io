@@ -6,8 +6,9 @@
 ## Phase 0 — Foundations & decisions
 - [x] Local git repo + `docs/`
 - [x] Hosting: GitHub Pages → [ADR 0002](decisions/0002-hosting-and-url.md)
-- [ ] **Choose URL** (user site / project site / custom domain) → then create GitHub repo & push
-- [ ] Confirm stack → [ADR 0001](decisions/0001-tech-stack.md)
+- [x] Choose URL → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
+- [ ] Create GitHub repo `hafizyunus/hafizyunus.github.io` & push
+- [x] Confirm stack → Astro ([ADR 0001](decisions/0001-tech-stack.md))
 - [ ] Confirm content model → [ARCHITECTURE.md](ARCHITECTURE.md)
 - [ ] Answer [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md)
 - [ ] Gather content: resume, role write-ups, projects, photo, links
@@ -18,7 +19,7 @@
 - [ ] `content/site.yaml` + schemas for all collections
 - [ ] Sections: Hero, About, Experience timeline, Projects, Skills, Education, Contact
 - [ ] Section order/visibility driven by `site.yaml`
-- [ ] Resume download
+- [ ] `/resume` page built from the same content, print-friendly, with PDF download
 - [ ] Responsive, light/dark mode
 - [ ] SEO: meta tags, Open Graph, sitemap, robots.txt
 - [ ] Accessibility pass (semantics, keyboard, contrast)
@@ -62,3 +63,4 @@ See [features backlog](features/README.md) for the full idea list.
 | Date | Change |
 |---|---|
 | 2026-09-26 | Initial roadmap; GitHub Pages chosen, URL pending |
+| 2026-09-26 | Astro accepted; URL set to hafizyunus.github.io; `/resume` page added to Phase 1 |

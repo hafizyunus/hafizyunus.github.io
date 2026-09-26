@@ -32,8 +32,8 @@
 ## `site.yaml` — the control panel
 ```yaml
 site:
-  url: ""            # decided later — see ADR 0002
-  basePath: ""       # only for project-site URLs
+  url: "https://hafizyunus.github.io"   # see ADR 0002
+  basePath: ""       # only needed for project-site URLs
   title: "Hafiz Yunus"
   description: "..."
   language: en

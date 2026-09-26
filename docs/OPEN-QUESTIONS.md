@@ -3,8 +3,8 @@
 Answer inline; resolved items move to the relevant ADR or doc.
 
 ## URL & hosting
-1. Which URL option — `<username>.github.io`, project site, or custom domain? ([ADR 0002](decisions/0002-hosting-and-url.md))
-2. What is your exact GitHub username?
+1. ~~Which URL option?~~ → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
+2. ~~GitHub username?~~ → `hafizyunus`
 
 ## Audience & tone
 3. Who is the main audience — recruiters, hiring managers, clients, peers?
@@ -23,4 +23,4 @@ Answer inline; resolved items move to the relevant ADR or doc.
 12. Colour preferences / anything to avoid?
 
 ## Stack
-13. Happy with Astro + Tailwind ([ADR 0001](decisions/0001-tech-stack.md)), or preference for something else?
+13. ~~Astro?~~ → Yes, accepted ([ADR 0001](decisions/0001-tech-stack.md))

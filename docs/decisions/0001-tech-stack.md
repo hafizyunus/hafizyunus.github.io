@@ -1,6 +1,6 @@
 # ADR 0001 — Tech stack
 
-- **Status:** Proposed
+- **Status:** Accepted (2026-09-26)
 - **Date:** 2026-09-26
 
 ## Context
@@ -9,7 +9,7 @@
 - Hosted on **GitHub Pages** → static output only (see [ADR 0002](0002-hosting-and-url.md)).
 - Should be fast, accessible, SEO-friendly, cheap (free) to run.
 
-## Decision (proposed)
+## Decision
 | Concern | Choice | Why |
 |---|---|---|
 | Framework | **Astro** | Built for content sites; ships ~zero JS by default; first-class static output for GitHub Pages. |
