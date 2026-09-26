@@ -15,7 +15,7 @@ Answer inline; resolved items are recorded in [BRIEF.md](BRIEF.md) or an ADR.
 - ~~Content source~~ → Resume in `_inbox/`, drafted by Claude, reviewed by owner
 
 ## Still open
-1. **Visual references**: 2–3 sites whose look you like (and what you like about each).
+1. **Visual direction**: review [design/REFERENCES.md](design/REFERENCES.md), pick direction A/B/C/D or a mix.
 2. Colour preferences / anything to avoid?
 3. Which roles/projects deserve full write-ups (detail pages)? *(after resume draft)*
 4. Any confidential/NDA work to describe vaguely or omit? *(after resume draft)*

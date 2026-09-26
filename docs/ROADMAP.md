@@ -12,9 +12,10 @@
 - [x] Audience, tone, primary action → [BRIEF.md](BRIEF.md)
 - [ ] Confirm content model → [ARCHITECTURE.md](ARCHITECTURE.md) (after drafting from resume)
 - [ ] Answer remaining [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md)
-- [ ] Gather content: resume into `_inbox/` → Claude drafts content files → review
+- [x] Resume placed in `_inbox/`
+- [ ] Claude drafts content files from resume → owner review
 - [ ] Gather project visuals (CAD renders, photos, drawings, plots)
-- [ ] Visual direction: 2–3 reference sites, colour/typography mood
+- [ ] Visual direction: pick from [design/REFERENCES.md](design/REFERENCES.md)
 
 ## Phase 1 — MVP (runs locally, deployable once URL is chosen)
 - [ ] Scaffold Astro + TypeScript + Tailwind, lint/format
