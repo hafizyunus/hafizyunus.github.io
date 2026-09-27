@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { getAlbums, tagsOf } from '../../lib/galleries';
+import { formatMonth, url } from '../../lib/utils';
+
+const albums = await getAlbums();
+const tags = tagsOf(albums);
+---
+
+<Base title="Gallery" description="Photos from competitions, builds and projects." doodle="gallery" wide>
+  <h1 class="font-serif text-4xl tracking-tight">Gallery</h1>
+  <p class="mt-3 max-w-[42rem] text-ink/75">Photos from competitions, builds and projects.</p>
+
+  {
+    tags.length > 1 && (
+      <div class="no-print mt-8 flex flex-wrap gap-2 text-sm" role="group" aria-label="Filter albums by tag" data-tag-filter hidden>
+        <button type="button" data-tag="" aria-pressed="true" class="tag-chip">all</button>
+        {tags.map((tag) => (
+          <button type="button" data-tag={tag} aria-pressed="false" class="tag-chip">
+            {tag}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  {albums.length === 0 && <p class="mt-10 text-muted">No albums yet.</p>}
+
+  <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+    {
+      albums.map(({ id, entry, photos, cover }) => (
+        <li data-tags={JSON.stringify(entry.data.tags)}>
+          <a href={url(`/gallery/${id}/`)} class="group block">
+            <div class="aspect-[3/2] overflow-hidden rounded-lg bg-rule/50">
+              {cover ? (
+                <Image
+                  src={cover.image}
+                  alt=""
+                  width={1200}
+                  widths={[600, 1200]}
+                  sizes="(min-width: 640px) 380px, 100vw"
+                  class="size-full object-cover transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none"
+                />
+              ) : (
+                <div class="grid size-full place-items-center text-sm text-muted">no photos yet</div>
+              )}
+            </div>
+            <h2 class="mt-3 font-serif text-xl group-hover:text-accent">{entry.data.title}</h2>
+            <p class="mt-0.5 text-xs text-muted">
+              {formatMonth(entry.data.date)} · {photos.length} {photos.length === 1 ? 'photo' : 'photos'}
+              {entry.data.tags.length > 0 && ` · ${entry.data.tags.join(', ')}`}
+            </p>
+            {entry.data.summary && <p class="mt-1.5 text-sm text-ink/75">{entry.data.summary}</p>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .tag-chip {
+    border: 1px solid var(--color-rule);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+    color: var(--color-muted);
+  }
+  .tag-chip:hover {
+    color: var(--color-accent);
+  }
+  .tag-chip[aria-pressed='true'] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+</style>
+
+<script>
+  // Tag filter. Without JavaScript every album is simply shown. ?tag=robotics links to a filtered view.
+  const filter = document.querySelector<HTMLElement>('[data-tag-filter]');
+  if (filter) {
+    filter.hidden = false;
+    const buttons = [...filter.querySelectorAll<HTMLButtonElement>('button[data-tag]')];
+    const cards = [...document.querySelectorAll<HTMLElement>('li[data-tags]')];
+    const apply = (tag: string) => {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.tag === tag)));
+      cards.forEach((c) => (c.hidden = tag !== '' && !JSON.parse(c.dataset.tags ?? '[]').includes(tag)));
+      const u = new URL(location.href);
+      if (tag) u.searchParams.set('tag', tag);
+      else u.searchParams.delete('tag');
+      history.replaceState(null, '', u);
+    };
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.tag ?? '')));
+    const initial = new URL(location.href).searchParams.get('tag') ?? '';
+    if (buttons.some((b) => b.dataset.tag === initial)) apply(initial);
+  }
+</script>

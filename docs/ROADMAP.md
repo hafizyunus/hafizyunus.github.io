@@ -42,7 +42,8 @@
 ## Phase 2 — More than the resume
 - [x] Detail page per role: template built in Phase 1; content still to be written
 - [ ] Project case studies with images/diagrams, repo/demo links
-- [ ] Galleries: photo albums with thumbnails + full-screen viewer → [features/galleries.md](features/galleries.md)
+- [x] Galleries: photo albums with tags, thumbnails + full-screen viewer → [features/galleries.md](features/galleries.md)
+- [ ] First real album (`robowars`): owner adds photos
 - [ ] Tags linking skills ↔ roles ↔ projects
 - [ ] `/now` and `/uses` pages
 - [ ] Testimonials, certifications, awards, talks

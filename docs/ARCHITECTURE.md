@@ -10,6 +10,7 @@
 ├─ content/                    ← everything you edit
 │  ├─ site.yaml                ← name, intro, email, menu, socials, work categories, URL
 │  ├─ work/                    ← one Markdown file per resume item → /work/<file-name>/
+│  ├─ galleries/<album>/       ← index.md + photos → /gallery/<album>/
 │  │  └─ images/<item>/        ← images for write-ups (auto-optimised)
 │  ├─ pages/about.md           ← About page
 │  ├─ education.yaml
@@ -21,9 +22,11 @@
 │  ├─ layouts/Base.astro       ← page shell: sidebar/top bar, SEO tags
 │  ├─ lib/site.ts              ← loads + validates site.yaml
 │  ├─ lib/utils.ts             ← dates, URLs, sorted/grouped work
+│  ├─ lib/galleries.ts         ← finds album photos; GPS/size checks
 │  ├─ pages/                   ← routes (see below)
 │  ├─ styles/global.css        ← design tokens + prose styles (see design/DIRECTIVE.md)
 │  └─ content.config.ts        ← schemas that validate content/
+├─ scripts/                   ← encode-email, prepare-photos (npm run …)
 ├─ .github/workflows/deploy.yml← build + publish to GitHub Pages on push to main
 └─ docs/
 ```
@@ -34,6 +37,8 @@
 | `/` | `pages/index.astro` | `site.yaml` intro + `featured: true` work items |
 | `/work/` | `pages/work/index.astro` | all work items grouped by `site.yaml → work.categories` |
 | `/work/<slug>/` | `pages/work/[slug].astro` | one work file: header, "at a glance" box, write-up, prev/next |
+| `/gallery/` | `pages/gallery/index.astro` | all albums, newest first; tag filter |
+| `/gallery/<album>/` | `pages/gallery/[album].astro` | one album: masonry grid + PhotoSwipe viewer |
 | `/about/` | `pages/about.astro` | `content/pages/about.md` |
 | `/resume/` | `pages/resume.astro` | education + skills + all work highlights; print-friendly |
 | `/contact/` | `pages/contact.astro` | `site.yaml` email, socials, contact message |

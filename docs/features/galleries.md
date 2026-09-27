@@ -1,6 +1,6 @@
 # Feature: Galleries (photo albums)
 
-- **Status:** Planned (2026-09-27)
+- **Status:** Implemented (2026-09-27). How to use it: [CONTENT-GUIDE.md → Galleries](../CONTENT-GUIDE.md#galleries-contentgalleriesalbum)
 - **Phase:** 2
 - **Why:** lots of engineering work is best shown as photos: competitions, builds, test days,
   projects that don't need a full write-up. A gallery is a titled album of photos with optional captions.
@@ -8,7 +8,7 @@
 ## What visitors see
 | URL | Page |
 |---|---|
-| `/gallery/` | Grid of albums: cover photo, title, date, photo count; grouped or filterable by kind |
+| `/gallery/` | Grid of albums: cover photo, title, date, photo count, tags; **tag filter buttons** (`?tag=` links work too) |
 | `/gallery/<album>/` | Title, date, short intro, then all photos in a grid. Click → full-screen viewer |
 
 - **Grid layout:** masonry-style columns that show each photo **uncropped** (important for
@@ -16,8 +16,8 @@
 - **Viewer (lightbox):** full screen, captions, ← → keys, swipe on phones, **pinch/scroll zoom**,
   Esc to close; each photo has its own link (`#photo-3`) so a single photo can be shared.
   Uses [PhotoSwipe](https://photoswipe.com), a small, well-tested open-source viewer (~20 KB).
-- **Links both ways:** an album can name a related work item (`related: combat-robot`); that
-  work page then shows a "Photos →" link, and the album links back to the write-up.
+- **No automatic links to work pages.** The owner links albums by hand in the write-ups
+  (`[photos](/gallery/robowars/)`), so the text and photos sit where they make sense.
 - Menu gets a `gallery` item (editable in `site.yaml → nav`).
 
 ## Adding an album (no code)
@@ -33,9 +33,8 @@ content/galleries/
 ---
 title: TechTatva 2023
 date: 2023-10
-kind: competition          # competition | project | event (list lives in site.yaml)
 summary: Second place with our 15 kg vertical spinner at MIT Manipal.
-related: combat-robot      # optional: a file name from content/work/
+tags: [combat robotics, competition]   # free-form; become filter buttons on /gallery/
 cover: 03-podium.jpg       # optional: defaults to the first photo
 captions:                  # optional: any photo can have one
   01-pit.jpg: Final checks in the pits
@@ -77,6 +76,9 @@ Nothing is served at full camera resolution. At build time each photo is convert
   **removes all metadata (incl. GPS)**, and fixes rotation, in place. A 6 MB phone photo becomes ~1 MB.
 - The build will **refuse** photos that still contain GPS data or are over 3000 px, with a message
   naming the file and the command to fix it, so nothing slips through.
+- Implementation note: photo sizes are read with sharp, **not** from Astro's `image.width`.
+  Touching any property of an imported image makes Astro publish the untouched original next to
+  the resized copies (see `src/lib/galleries.ts`).
 
 ### Size limits to keep in mind
 - GitHub Pages: site up to ~1 GB; repo recommended under ~1 GB.
@@ -84,16 +86,18 @@ Nothing is served at full camera resolution. At build time each photo is convert
 - Build time grows with photo count (each photo → ~5 sizes). ~200 photos adds roughly a minute
   to the first build; GitHub caches nothing between builds, so every deploy pays it.
 
-## Build plan
-1. `galleries` content collection + schema (title, date, kind, summary, related, cover, captions, draft).
+## Build plan (done)
+1. `galleries` content collection + schema (title, date, summary, tags, cover, captions, draft).
 2. Auto-discover photos per album folder at build time.
 3. `/gallery/` index and `/gallery/<album>/` pages; masonry grid with responsive thumbnails.
 4. PhotoSwipe viewer: captions, zoom, deep links, keyboard/swipe, reduced-motion aware.
-5. `related` links in both directions; `gallery` in the menu.
+5. Tag filter on `/gallery/`; `gallery` in the menu.
 6. `npm run prepare-photos` helper + build-time checks (GPS, oversize).
-7. Docs: content guide section; one sample album to copy.
-8. Verify: Lighthouse on a gallery page, phone layout, dark mode.
+7. Docs: content guide section; sample album `robowars` to copy.
+8. Verify: Lighthouse 98–100 on `/gallery/` and an album page; phone layout; build refuses GPS/oversize photos.
 
-## Open questions
-- Album kinds: `competition`, `project`, `event`. Enough, or others (e.g. `travel`, `workshop`)?
-- Should work pages also show a small strip of 3–4 photos from their related album, or just a link?
+## Decisions (2026-09-27)
+- **Tags instead of preset album types.** Any tags the owner writes; the filter is built from them.
+- **No photo strip on work pages;** links are added by hand in the text.
+- **Empty albums** are shown only in `npm run dev`, never on the live site.
+

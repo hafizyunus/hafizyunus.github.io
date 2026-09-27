@@ -34,6 +34,24 @@ const work = defineCollection({
     }),
 });
 
+// Photo albums: one folder per album with an index.md; photos are found automatically.
+const galleries = defineCollection({
+  loader: glob({
+    pattern: '*/index.md',
+    base: './content/galleries',
+    generateId: ({ entry }) => entry.split('/')[0], // folder name = URL
+  }),
+  schema: z.object({
+    title: z.string(),
+    date: month,
+    summary: z.string().optional(), // one line for the album card
+    tags: z.array(z.string()).default([]), // free-form; become filter buttons on /gallery/
+    cover: z.string().optional(), // photo file name; defaults to the first photo
+    captions: z.record(z.string(), z.string()).default({}), // { "01-pit.jpg": "Caption" }
+    draft: z.boolean().default(false),
+  }),
+});
+
 // Free-form pages such as About.
 const pages = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './content/pages' }),
@@ -70,4 +88,4 @@ const skills = defineCollection({
   }),
 });
 
-export const collections = { work, pages, education, skills };
+export const collections = { work, galleries, pages, education, skills };

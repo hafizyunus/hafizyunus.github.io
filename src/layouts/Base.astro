@@ -113,8 +113,8 @@ const ogImage = new URL(url('/og.png'), Astro.site);
     </div>
 
     <footer class="no-print px-5 pb-8 text-xs text-muted lg:hidden">
-      © {year} {config.person.name} ·
-      {config.socials.map((s, i) => <>{i > 0 && ' · '}<SocialLink label={s.label} href={s.url} class="hover:text-accent" /></>)}
+      © {year} {config.person.name}
+      {config.socials.map((s) => <>{' · '}<SocialLink label={s.label} href={s.url} class="hover:text-accent" /></>)}
     </footer>
   </body>
 </html>

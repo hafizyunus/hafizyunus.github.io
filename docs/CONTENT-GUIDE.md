@@ -16,6 +16,7 @@ names the file and field.
 |---|---|
 | Name, intro, menu, social links (email: see below) | [`content/site.yaml`](../content/site.yaml) |
 | A job, team or project | a file in [`content/work/`](../content/work) |
+| A photo album | a folder in [`content/galleries/`](../content/galleries) (see [Galleries](#galleries-contentgalleriesalbum)) |
 | About page | [`content/pages/about.md`](../content/pages/about.md) |
 | Education | [`content/education.yaml`](../content/education.yaml) |
 | Skills | [`content/skills.yaml`](../content/skills.yaml) |
@@ -80,6 +81,69 @@ A paragraph with **bold** and a [link](https://example.com).
 ### Images
 Put images in `content/work/images/<item-name>/` and link them relatively as above. They're
 resized and compressed automatically. JPG for photos, PNG for screenshots/plots. Keep originals under ~5 MB.
+
+## Galleries (`content/galleries/<album>/`)
+Photo albums for competitions, builds and projects without a write-up. Each **folder** is one
+album at `/gallery/<folder-name>/`, listed on `/gallery/`.
+
+```
+content/galleries/
+└─ robowars/                 ← folder name = URL (lowercase-with-dashes)
+   ├─ index.md               ← album settings
+   ├─ 01-pits.jpg            ← photos: added automatically, in file-name order
+   ├─ 02-arena.jpg
+   └─ 03-podium.jpg
+```
+
+### Add an album
+1. Copy the `robowars` folder, rename it, and edit its `index.md`.
+2. Put your photos in the folder. Name them `01-…`, `02-…` to control the order.
+3. **Clean the photos** (required, see below):
+   ```bash
+   npm run prepare-photos -- content/galleries/<album>
+   ```
+4. Preview with `npm run dev`, then commit and push.
+
+### `index.md` fields
+| Field | Required | Notes |
+|---|---|---|
+| `title` | ✓ | Album name |
+| `date` | ✓ | `YYYY-MM`; albums are listed newest first |
+| `summary` | | One line shown on the album card and under the title |
+| `tags` | | Any words you like, e.g. `[combat robotics, competition]`. Each tag becomes a filter button on `/gallery/` |
+| `cover` | | File name of the cover photo; defaults to the first photo |
+| `captions` | | Per-photo captions by file name (shown in the full-screen viewer) |
+| `draft` | | `true` hides the album |
+
+```yaml
+captions:
+  01-pits.jpg: Final checks in the pits
+  03-podium.jpg: "Second place: TechTatva 2023"   # quotes because of the ": "
+```
+
+Anything below the second `---` is optional intro text (Markdown), shown above the photos.
+
+### Photos
+- **Formats:** JPG, PNG, WebP, AVIF. iPhone **HEIC** photos must be exported as JPG first (the build tells you if one sneaks in).
+- **Why `prepare-photos`:** this repo is public, so the original files can be downloaded from GitHub.
+  Phone photos usually contain the **GPS location** where they were taken. The command, run in place:
+  - removes all metadata (GPS, camera details),
+  - turns sideways phone photos upright,
+  - shrinks anything over 3000 px on the long edge (a 6 MB phone photo → ~1 MB).
+
+  Photos that are already clean are left untouched, so it's safe to run again after adding more.
+- **Safety net:** the build **stops** if a photo still has GPS data or is over 3000 px, and prints the command to fix it.
+- **What visitors download:** never your originals. The site serves resized WebP copies: small
+  thumbnails (400/800 px) in the grid, and a sharp full-screen version (1600/2560 px) only when a photo is opened.
+- An album with no photos yet shows a placeholder while you preview locally, and is left off the live site until it has photos.
+
+### Link to an album from a work page
+Write a normal Markdown link in the work file's text:
+```markdown
+[See the photos from the competition](/gallery/robowars/)
+```
+A single photo can be linked too: `/gallery/robowars/#photo-3` opens straight to the third photo.
+To link to a filtered view of all albums with a tag, use `/gallery/?tag=competition`.
 
 ## YAML gotchas
 - If a value contains a colon followed by a space (`: `), wrap it in quotes:

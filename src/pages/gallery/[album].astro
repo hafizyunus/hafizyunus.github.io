@@ -1,0 +1,156 @@
+---
+import { getImage, Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { getAlbums, type Album } from '../../lib/galleries';
+import { formatMonth, url } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const albums = await getAlbums();
+  return albums.map((album) => ({ params: { album: album.id }, props: { album } }));
+}
+
+interface Props {
+  album: Album;
+}
+
+const { album } = Astro.props;
+const { entry, photos } = album;
+const { Content } = await render(entry);
+
+// Full-screen versions: 1600px and 2560px on the long edge (never larger than the original).
+const LONG_EDGES = [1600, 2560];
+const items = await Promise.all(
+  photos.map(async (photo, i) => {
+    const { width: w, height: h } = photo;
+    const scale = (edge: number) => Math.min(1, edge / Math.max(w, h));
+    const widths = [...new Set(LONG_EDGES.map((edge) => Math.round(w * scale(edge))))];
+    const maxWidth = Math.max(...widths);
+    const large = await getImage({ src: photo.image, width: maxWidth, widths, format: 'webp' });
+    return {
+      ...photo,
+      n: i + 1,
+      large,
+      largeWidth: maxWidth,
+      largeHeight: Math.round((h * maxWidth) / w),
+    };
+  }),
+);
+---
+
+<Base title={entry.data.title} description={entry.data.summary ?? `Photos: ${entry.data.title}`} wide>
+  <a href={url('/gallery/')} class="no-print text-sm text-muted hover:text-accent">← gallery</a>
+
+  <header class="mt-8 max-w-[42rem]">
+    <h1 class="font-serif text-4xl leading-tight tracking-tight">{entry.data.title}</h1>
+    <p class="mt-2 text-sm text-muted">
+      {formatMonth(entry.data.date)} · {photos.length} {photos.length === 1 ? 'photo' : 'photos'}
+      {
+        entry.data.tags.map((tag) => (
+          <>
+            {' · '}
+            <a href={url(`/gallery/?tag=${encodeURIComponent(tag)}`)} class="hover:text-accent">
+              {tag}
+            </a>
+          </>
+        ))
+      }
+    </p>
+    {entry.data.summary && <p class="mt-4 text-lg text-ink/85">{entry.data.summary}</p>}
+    <div class="prose mt-4">
+      <Content />
+    </div>
+  </header>
+
+  {photos.length === 0 && <p class="mt-10 rounded-lg border border-dashed border-rule p-6 text-sm text-muted">No photos yet. Add some to <code>content/galleries/{album.id}/</code>.</p>}
+
+  <!-- Masonry-style columns: photos keep their full shape (no cropping) -->
+  <div id="album" class="mt-10 columns-2 gap-3 sm:columns-3 [&>*]:mb-3">
+    {
+      items.map((item) => (
+        <a
+          href={item.large.src}
+          id={`photo-${item.n}`}
+          data-pswp-width={item.largeWidth}
+          data-pswp-height={item.largeHeight}
+          data-pswp-srcset={item.large.srcSet.attribute}
+          data-caption={item.caption}
+          class="block break-inside-avoid overflow-hidden rounded-md"
+          target="_blank"
+        >
+          <Image
+            src={item.image}
+            alt={item.caption ?? `${entry.data.title}, photo ${item.n}`}
+            width={800}
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 250px, (min-width: 640px) 33vw, 50vw"
+            class="w-full transition-opacity hover:opacity-90"
+          />
+        </a>
+      ))
+    }
+  </div>
+</Base>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#album',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+    bgOpacity: 0.94,
+    showHideAnimationType: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'none' : 'zoom',
+    // Scroll/pinch zoom up to the full-size image
+    secondaryZoomLevel: 1,
+    maxZoomLevel: 2,
+  });
+
+  // Caption bar under each photo
+  lightbox.on('uiRegister', () => {
+    lightbox.pswp?.ui?.registerElement({
+      name: 'caption',
+      order: 9,
+      isButton: false,
+      appendTo: 'root',
+      onInit: (el, pswp) => {
+        pswp.on('change', () => {
+          const text = pswp.currSlide?.data.element?.dataset.caption ?? '';
+          el.textContent = text;
+          el.hidden = !text;
+        });
+      },
+    });
+  });
+
+  // Each photo has its own link: /gallery/<album>/#photo-3
+  lightbox.on('change', () => {
+    const index = lightbox.pswp?.currIndex ?? 0;
+    history.replaceState(null, '', `#photo-${index + 1}`);
+  });
+  lightbox.on('close', () => history.replaceState(null, '', location.pathname + location.search));
+
+  lightbox.init();
+
+  const openFromHash = () => {
+    const match = location.hash.match(/^#photo-(\d+)$/);
+    if (match && !lightbox.pswp) lightbox.loadAndOpen(Number(match[1]) - 1);
+  };
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
+</script>
+
+<style is:global>
+  .pswp__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1.25rem 1.25rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #e6e3dd;
+    background: linear-gradient(transparent, rgb(0 0 0 / 0.55));
+  }
+</style>
