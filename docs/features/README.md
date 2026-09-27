@@ -5,6 +5,7 @@ their own file in this folder (e.g. `blog.md`) when we start on it.
 
 | Feature | Value | Effort | Phase | Notes |
 |---|---|---|---|---|
+| **Galleries / photo albums** | High | M | 2 | Competitions, builds, projects without a write-up → [galleries.md](galleries.md) |
 | Role detail pages | High | M | 2 | The main "beyond resume" content |
 | Project case studies | High | M | 2 | Problem → approach → result |
 | Skill ↔ experience tag links | High | S | 2 | Click a skill, see where it was used |
