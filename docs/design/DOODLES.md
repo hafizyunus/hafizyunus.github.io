@@ -4,13 +4,13 @@ Hand-drawn mechanical doodles give the site its personality (like tanqinghua.asi
 while everything else stays quiet.
 
 ## Current set: generated (2026-09-27)
-The Priority 1 page doodles (#1–6) are **generated in code** by [`scripts/doodles.mjs`](../../scripts/doodles.mjs)
+The page doodles (#1–6, plus the gallery page) are **generated in code** by [`scripts/doodles.mjs`](../../scripts/doodles.mjs)
 with [rough.js](https://roughjs.com), the library behind Excalidraw's hand-drawn look:
 ```bash
 npm run doodles      # writes src/assets/doodles/*.svg (same output every run)
 ```
 - Shapes are described in the script (lines, rectangles, gears…); edit it and re-run to tweak a doodle.
-- **Animation lives inside each SVG** (CSS): gears turn, steam rises, the paper plane bobs.
+- **Animation lives inside each SVG** (CSS): gears turn, steam rises, the paper plane bobs, the camera flashes.
   No separate layer files are needed, and it stops for visitors who prefer reduced motion.
 - Dark mode inverts the black lines to light ones automatically.
 - **Replacing one with your own drawing:** save your SVG over `src/assets/doodles/<name>.svg` and
@@ -86,5 +86,5 @@ the final versions into the site's assets.
 | 4 resume | ✅ Generated: clipboard with a stepped-shaft drawing and dimensions |
 | 5 contact | ✅ Generated: paper plane (bobbing) with a dashed loop trail |
 | 6 404 | ✅ Generated: snapped bolt |
-| gallery page | Not started (dev shows a placeholder) |
+| gallery page | ✅ Generated: camera (flash goes off every few seconds) + two photos pegged on a string |
 | 7–13 work icons | Not started |

@@ -70,10 +70,12 @@ const ANIMATION_CSS = `
   .spin{transform-box:view-box;animation:spin linear infinite}
   .steam{animation:steam 3.6s ease-in-out infinite}
   .bob{animation:bob 4s ease-in-out infinite}
+  .flash{animation:flash 5s ease-out infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   @keyframes steam{0%{transform:translateY(6px);opacity:0}35%{opacity:1}100%{transform:translateY(-14px);opacity:0}}
   @keyframes bob{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(4px,-7px) rotate(-2deg)}}
-  @media (prefers-reduced-motion:reduce){.spin,.steam,.bob{animation:none}.steam{opacity:.8}}`;
+  @keyframes flash{0%,84%{opacity:0}87%{opacity:1}100%{opacity:0}}
+  @media (prefers-reduced-motion:reduce){.spin,.steam,.bob,.flash{animation:none}.steam,.flash{opacity:.8}}`;
 
 const svg = (title, body) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" fill="none" role="img" aria-label="${title}"><style>${ANIMATION_CSS}</style>${body}</svg>\n`;
@@ -197,6 +199,45 @@ const DOODLES = {
       poly([[214, 146], [228, 158], [196, 196]], { roughness: 0.8 }) +
       line(330, 96, 228, 158, { strokeWidth: 1.6 });
     return svg('A paper plane', trail + `<g class="bob">${plane}</g>`);
+  },
+
+  // Camera (flash going off) and two photos pegged on a string: a gear and a combat robot
+  gallery: () => {
+    seed = 700;
+    const string = curve([[132, 36], [262, 60], [392, 44]], { strokeWidth: 1.6, roughness: 0.6 });
+    const peg = (x, y) => rect(x, y, 9, 18, { strokeWidth: 1.6, roughness: 0.5 });
+    const photo1 =
+      poly([[168, 58], [248, 52], [255, 150], [175, 156]]) +
+      poly([[176, 64], [241, 59], [246, 124], [181, 129]], { strokeWidth: 1.6, roughness: 0.7 }) +
+      gear(211, 94, 20, 15, 8) +
+      peg(203, 44);
+    const photo2 =
+      poly([[284, 60], [362, 66], [356, 162], [278, 156]]) +
+      poly([[290, 68], [355, 73], [351, 131], [286, 126]], { strokeWidth: 1.6, roughness: 0.7 }) +
+      poly([[296, 114], [320, 101], [342, 103], [342, 116]], { strokeWidth: 1.8, roughness: 0.6 }) +
+      line(318, 101, 336, 90, { strokeWidth: 2.2 }) +
+      circle(306, 118, 11, { strokeWidth: 1.6 }) +
+      circle(334, 119, 11, { strokeWidth: 1.6 }) +
+      line(288, 124, 350, 128, { strokeWidth: 1.2, roughness: 0.6 }) +
+      peg(318, 52);
+    const camera =
+      rect(40, 176, 196, 110) +
+      rect(70, 158, 52, 20) +
+      rect(192, 164, 24, 12, { strokeWidth: 1.8 }) +
+      circle(150, 232, 84) +
+      circle(150, 232, 56, { strokeWidth: 1.8 }) +
+      circle(150, 232, 20, shade({ hachureGap: 4, strokeWidth: 1.6 })) +
+      rect(52, 188, 34, 18, { strokeWidth: 1.8 }) +
+      line(40, 204, 104, 204, { strokeWidth: 1.4, roughness: 0.5 }) +
+      line(196, 204, 236, 204, { strokeWidth: 1.4, roughness: 0.5 });
+    const burst = `<g class="flash">${[
+      [50, 184, 38, 170],
+      [60, 181, 56, 163],
+      [42, 194, 25, 189],
+    ]
+      .map(([x1, y1, x2, y2]) => line(x1, y1, x2, y2, { strokeWidth: 2, roughness: 0.5 }))
+      .join('')}</g>`;
+    return svg('A camera and two photos on a string', string + photo1 + photo2 + camera + burst);
   },
 
   // Snapped bolt
