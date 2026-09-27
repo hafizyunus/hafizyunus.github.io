@@ -9,6 +9,9 @@ tags: [combat robotics, competition]   # anything you like; they become filter b
 # captions:                   # optional; use the exact file names
 #   01-pits.jpg: Final checks in the pits
 #   03-arena.jpg: Second place at TechTatva 2023, MIT Manipal
+captions:
+     01-IITB3.jpg: Well deserved rest after a long night of assembly
+
 draft: false
 ---
 
