@@ -68,4 +68,6 @@
 Suggested: **A or B for the overall feel, borrowing D's sticky left nav** (which your reference already uses).
 
 ## Decision
-_Pending — owner reviewing._
+Owner picked (2026-09-27): **maggieappleton.com** (font, density), **macwright.com** (clean
+text + image subpages), **tanqinghua.asia** (white, minimal, sidebar).
+Combined into → [DIRECTIVE.md](DIRECTIVE.md).
