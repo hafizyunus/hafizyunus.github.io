@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Doodle from '../../components/Doodle.astro';
+import SkillLink from '../../components/SkillLink.astro';
 import { config } from '../../lib/site';
 import { formatRange, getWork, url, type Work } from '../../lib/utils';
 
@@ -64,7 +65,26 @@ const categoryLabel = config.work.categories.find((c) => c.id === data.category)
       {
         data.tools.length > 0 && (
           <p class="mt-4 text-xs text-muted">
-            <span class="font-medium text-ink/70">Tools & methods:</span> {data.tools.join(' · ')}
+            <span class="font-medium text-ink/70">Tools & methods:</span>{' '}
+            {data.tools.map((t, i) => (
+              <>
+                {i > 0 && ' · '}
+                <SkillLink name={t} />
+              </>
+            ))}
+          </p>
+        )
+      }
+      {
+        data.tags.length > 0 && (
+          <p class="mt-1.5 text-xs text-muted">
+            <span class="font-medium text-ink/70">Skills & topics:</span>{' '}
+            {data.tags.map((t, i) => (
+              <>
+                {i > 0 && ' · '}
+                <SkillLink name={t} />
+              </>
+            ))}
           </p>
         )
       }

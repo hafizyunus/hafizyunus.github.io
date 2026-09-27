@@ -8,12 +8,13 @@ their own file in this folder (e.g. `blog.md`) when we start on it.
 | **Galleries / photo albums** ✅ | High | M | 2 | Competitions, builds, projects without a write-up → [galleries.md](galleries.md) |
 | Role detail pages | High | M | 2 | The main "beyond resume" content |
 | Project case studies | High | M | 2 | Problem → approach → result |
-| Skill ↔ experience tag links | High | S | 2 | Click a skill, see where it was used |
+| Skill ↔ experience tag links ✅ | High | S | 2 | Click a skill, see where it was used (`/skills/`) |
 | Resume PDF download | High | S | 1 | |
 | Light/dark mode | Med | S | 1 | |
-| `/now` page | Med | S | 2 | Easy to keep fresh |
-| `/uses` page | Low | S | 2 | |
-| Testimonials | Med | S | 2 | Pull from LinkedIn recommendations |
+| `/now` page | Low | S | — | Deferred: home page "Currently" line covers it; only worth it with regular updates |
+| ~~`/uses` page~~ | Low | S | — | Dropped: tools already shown elsewhere |
+| ~~Testimonials~~ | Med | S | — | Dropped |
+| Awards & achievements ✅ | Med | S | 2 | `content/awards.yaml` → resume page |
 | Blog + RSS | Med | M | 3 | |
 | Contact form | Med | S | 3 | Formspree / Web3Forms (static-friendly) |
 | Analytics | Med | S | 3 | GoatCounter/Umami — no cookie banner |

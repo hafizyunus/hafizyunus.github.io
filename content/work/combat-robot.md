@@ -15,7 +15,7 @@ metrics:
   - { value: "15 kg", label: robot mass }
   - { value: "2nd", label: TechTatva 2023 }
 tools: [Chain drives, Aluminium fabrication]  # TODO: add CAD software used
-tags: [robotics, combat-robotics, design-for-manufacture]
+tags: [Robotics mechanism design, Robotics, Combat robotics]
 doodle: combat-robot
 featured: true
 order: 1

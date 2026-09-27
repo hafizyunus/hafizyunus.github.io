@@ -17,8 +17,8 @@ highlights:
 metrics:
   - { value: "25+", label: engineers led }
   - { value: "2nd", label: Pi-EV 2024 }
-tools: [MATLAB, Structural FEA, Vehicle dynamics]  # TODO: add CAD/FEA software used
-tags: [motorsport, vehicle-dynamics, brakes, simulation, leadership]
+tools: [MATLAB]  # TODO: add CAD/FEA software used
+tags: [Automotive mechanical design, Vehicle dynamics, Structural FEA, Simulation, Leadership, Motorsport]
 doodle: nitkracing
 featured: true
 order: 2

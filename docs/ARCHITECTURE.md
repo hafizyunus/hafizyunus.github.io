@@ -13,6 +13,7 @@
 │  ├─ galleries/<album>/       ← index.md + photos → /gallery/<album>/
 │  │  └─ images/<item>/        ← images for write-ups (auto-optimised)
 │  ├─ pages/about.md           ← About page
+│  ├─ awards.yaml
 │  ├─ education.yaml
 │  └─ skills.yaml
 ├─ public/                     ← served as-is (favicon, robots.txt, resume PDF, CNAME later)
@@ -23,6 +24,7 @@
 │  ├─ lib/site.ts              ← loads + validates site.yaml
 │  ├─ lib/utils.ts             ← dates, URLs, sorted/grouped work
 │  ├─ lib/galleries.ts         ← finds album photos; GPS/size checks
+│  ├─ lib/skills.ts            ← links skills.yaml, work tools/tags and album tags by name
 │  ├─ pages/                   ← routes (see below)
 │  ├─ styles/global.css        ← design tokens + prose styles (see design/DIRECTIVE.md)
 │  └─ content.config.ts        ← schemas that validate content/
@@ -39,8 +41,10 @@
 | `/work/<slug>/` | `pages/work/[slug].astro` | one work file: header, "at a glance" box, write-up, prev/next |
 | `/gallery/` | `pages/gallery/index.astro` | all albums, newest first; tag filter |
 | `/gallery/<album>/` | `pages/gallery/[album].astro` | one album: masonry grid + PhotoSwipe viewer |
+| `/skills/` | `pages/skills/index.astro` | every skill/tool/tag with usage counts |
+| `/skills/<slug>/` | `pages/skills/[skill].astro` | work items and albums using that skill |
 | `/about/` | `pages/about.astro` | `content/pages/about.md` |
-| `/resume/` | `pages/resume.astro` | education + skills + all work highlights; print-friendly |
+| `/resume/` | `pages/resume.astro` | education + skills (linked) + all work highlights + awards; print-friendly |
 | `/contact/` | `pages/contact.astro` | `site.yaml` email, socials, contact message |
 | `/og.png` | `pages/og.png.ts` | share image rendered at build time (satori + resvg) from `site.yaml` |
 | `/resume.pdf` | `public/resume.pdf` | copied as-is |

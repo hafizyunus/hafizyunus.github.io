@@ -16,8 +16,8 @@ highlights:
   - Test-to-report analysis in about 1 week under tight NPI timelines, enabling rapid validation of high-capacity gensets for growing data-center power demand.
 metrics:
   - { value: "~1 week", label: test-to-report turnaround }
-tools: [Vibration analysis, Strain gauging, FEA correlation]  # TODO: add software you use
-tags: [vibration, testing, fea, gensets]
+tools: [Strain gauging, Vibration gauging, FEA correlation]  # TODO: add software you use
+tags: [Vibration data processing & analysis, Testing & validation, Gensets]
 doodle: cat-associate
 featured: true
 order: 2

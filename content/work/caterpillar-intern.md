@@ -12,8 +12,8 @@ summary: >-
 highlights:
   - Created a tool for genset base-rail design to optimise lift-eye placement, considering lift-eye forces and resulting stresses.
   - Conducted bolted joint analysis of lift eyes and non-linear FEA of base-rail assemblies in Creo Simulate.
-tools: [Creo Simulate, Creo Parametric, Bolted joint analysis, Non-linear FEA]
-tags: [fea, design-tools, lifting, gensets]
+tools: [Creo Simulate, Non-linear FEA]
+tags: [Bolted joint analysis, Structural FEA, Design tools, Gensets]
 doodle: cat-intern
 order: 1
 ---

@@ -16,8 +16,8 @@ highlights:
 metrics:
   - { value: "10+", label: engineers led }
   - { value: "2", label: robots built }
-tools: [Mechanism design, Manufacturing]  # TODO: add CAD software used
-tags: [robotics, mechanisms, leadership]
+tools: [Manufacturing]  # TODO: add CAD software used
+tags: [Robotics mechanism design, Robotics, Leadership]
 doodle: robocon
 order: 1
 ---

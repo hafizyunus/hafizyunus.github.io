@@ -19,7 +19,8 @@ names the file and field.
 | A photo album | a folder in [`content/galleries/`](../content/galleries) (see [Galleries](#galleries-contentgalleriesalbum)) |
 | About page | [`content/pages/about.md`](../content/pages/about.md) |
 | Education | [`content/education.yaml`](../content/education.yaml) |
-| Skills | [`content/skills.yaml`](../content/skills.yaml) |
+| Skills | [`content/skills.yaml`](../content/skills.yaml) (see [Skills & tags](#skills--tags)) |
+| Awards & achievements | [`content/awards.yaml`](../content/awards.yaml) (see [Awards](#awards-contentawardsyaml)) |
 | Resume PDF | **replace `public/resume.pdf`** with the new file, keeping the same name (the URL stays the same). Visitors download it as `Hafiz_Yunus_Kalathil_Resume.pdf`. Keep versions with your phone number in `_inbox/`, never in `public/` |
 | Doodles | `src/assets/doodles/<name>.svg` (see [design/DOODLES.md](design/DOODLES.md)) |
 
@@ -57,8 +58,10 @@ The part between the `---` lines is the card/summary data:
 | `location` | | |
 | `highlights` | | Resume bullets, also shown in the "at a glance" box |
 | `metrics` | | `- { value: "15 kg", label: robot mass }`: big numbers in the "at a glance" box |
-| `tools` | | Software and methods |
-| `tags` | | Keywords (used for filtering later) |
+| `tools` | | Software and methods, e.g. `[Ansys Mechanical, MATLAB]` |
+| `tags` | | Skills and topics, e.g. `[Structural FEA, Motorsport]` |
+
+`tools` and `tags` become links to [skill pages](#skills--tags).
 | `doodle` | | Doodle file name without `.svg` |
 | `cover`, `coverAlt` | | Top image, e.g. `cover: ./images/combat-robot/hero.jpg` |
 
@@ -81,6 +84,38 @@ A paragraph with **bold** and a [link](https://example.com).
 ### Images
 Put images in `content/work/images/<item-name>/` and link them relatively as above. They're
 resized and compressed automatically. JPG for photos, PNG for screenshots/plots. Keep originals under ~5 MB.
+
+## Skills & tags
+Every skill, tool and tag gets a page at `/skills/<name>/` listing the work and photo albums
+that use it. All skills are listed at `/skills/` (linked from the resume's Skills heading).
+
+**They link up by name.** The same words in any of these places count as one skill:
+- `content/skills.yaml` (your resume's skill list)
+- a work file's `tools` or `tags`
+- a photo album's `tags`
+
+Matching ignores capitals and punctuation, so `Ansys Mechanical`, `ANSYS mechanical` and
+`ansys-mechanical` are the same. But different words are different skills: `FEA` and
+`Structural FEA` are two separate pages, so **copy the exact wording from `skills.yaml`** when
+you tag a work item.
+
+- A skill in `skills.yaml` that no work uses yet is shown faded on `/skills/` (not a link).
+  Add it to the `tools`/`tags` of the work where you used it, and it becomes a link.
+- The name shown is the `skills.yaml` wording if the skill is there, otherwise the first spelling found.
+- To put **Skills** in the menu, add `- { label: skills, href: /skills/ }` to `nav` in `site.yaml`.
+
+## Awards (`content/awards.yaml`)
+Shown at the end of the resume page, in the order written.
+
+```yaml
+- id: pi-ev-2024                 # unique, lowercase-with-dashes
+  title: Second place, Pi-EV 2024
+  org: Formula Student concept challenge   # optional
+  date: "2024"                   # "YYYY" or "YYYY-MM", in quotes
+  note: EV powertrain design, with NITKRacing.   # optional, one line
+  work: nitkracing               # optional: links to content/work/nitkracing.md
+```
+If `work` doesn't match a file in `content/work/`, the build stops and says so.
 
 ## Galleries (`content/galleries/<album>/`)
 Photo albums for competitions, builds and projects without a write-up. Each **folder** is one

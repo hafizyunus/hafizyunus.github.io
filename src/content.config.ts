@@ -88,4 +88,16 @@ const skills = defineCollection({
   }),
 });
 
-export const collections = { work, galleries, pages, education, skills };
+const awards = defineCollection({
+  loader: file('./content/awards.yaml', { parser: ordered }),
+  schema: z.object({
+    position: z.number(),
+    title: z.string(),
+    org: z.string().optional(),
+    date: z.string().regex(/^\d{4}(-(0[1-9]|1[0-2]))?$/, 'Use "YYYY" or "YYYY-MM"'),
+    note: z.string().optional(),
+    work: z.string().optional(), // file name in content/work/, checked when the site is built
+  }),
+});
+
+export const collections = { work, galleries, pages, education, skills, awards };

@@ -3,14 +3,20 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Email from '../components/Email.astro';
+import SkillLink from '../components/SkillLink.astro';
 import { config } from '../lib/site';
-import { formatRange, getWorkByCategory, url } from '../lib/utils';
+import { byPosition, formatDate, formatRange, getWorkByCategory, url } from '../lib/utils';
 
 const groups = await getWorkByCategory();
-const byPosition = (a: { data: { position: number } }, b: { data: { position: number } }) =>
-  a.data.position - b.data.position;
 const education = (await getCollection('education')).sort(byPosition);
 const skills = (await getCollection('skills')).sort(byPosition);
+const awards = (await getCollection('awards')).sort(byPosition);
+const workIds = new Set(groups.flatMap((g) => g.items.map((w) => w.id)));
+for (const { id, data } of awards) {
+  if (data.work && !workIds.has(data.work)) {
+    throw new Error(`content/awards.yaml (${id}): work "${data.work}" isn't a file in content/work/`);
+  }
+}
 const { person } = config;
 // File name used when someone downloads the PDF, e.g. Hafiz_Yunus_Kalathil_Resume.pdf
 const pdfName = `${person.fullName.replaceAll(' ', '_')}_Resume.pdf`;
@@ -60,13 +66,23 @@ const pdfName = `${person.fullName.replaceAll(' ', '_')}_Resume.pdf`;
   </section>
 
   <section class="mt-10">
-    <h2 class="border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">Skills</h2>
+    <h2 class="flex justify-between border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">
+      Skills
+      <a href={url('/skills/')} class="no-print normal-case tracking-normal hover:text-accent">where I've used them →</a>
+    </h2>
     <dl class="mt-4 space-y-2 text-sm">
       {
         skills.map(({ data }) => (
           <div class="sm:flex sm:gap-4">
             <dt class="shrink-0 font-medium sm:w-40">{data.label}</dt>
-            <dd class="text-ink/75">{data.items.join(', ')}</dd>
+            <dd class="text-ink/75">
+              {data.items.map((name, i) => (
+                <>
+                  {i > 0 && ', '}
+                  <SkillLink name={name} />
+                </>
+              ))}
+            </dd>
           </div>
         ))
       }
@@ -103,5 +119,33 @@ const pdfName = `${person.fullName.replaceAll(' ', '_')}_Resume.pdf`;
         ))}
       </section>
     ))
+  }
+
+  {
+    awards.length > 0 && (
+      <section class="mt-10">
+        <h2 class="border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">Awards & achievements</h2>
+        <ul class="mt-4 space-y-3 text-sm">
+          {awards.map(({ data }) => (
+            <li class="flex flex-wrap justify-between gap-x-4">
+              <div>
+                <p class="font-medium">
+                  {data.work ? (
+                    <a href={url(`/work/${data.work}/`)} class="hover:text-accent">
+                      {data.title}
+                    </a>
+                  ) : (
+                    data.title
+                  )}
+                  {data.org && <span class="font-normal text-ink/75"> · {data.org}</span>}
+                </p>
+                {data.note && <p class="text-ink/75">{data.note}</p>}
+              </div>
+              <p class="text-muted">{formatDate(data.date)}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
   }
 </Base>

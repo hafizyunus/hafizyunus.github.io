@@ -15,8 +15,8 @@ highlights:
   - Thermal analysis of the casing heatsink, optimising fan placement and heatsink geometry for airflow and lower temperatures in ANSYS Icepak and SOLIDWORKS Flow Simulation.
 metrics:
   - { value: "~100", label: clip designs generated }
-tools: [ANSYS Mechanical, ANSYS Icepak, SOLIDWORKS Flow Simulation, MATLAB]
-tags: [thermal, fea, cfd, testing]
+tools: [Ansys Mechanical, Ansys Icepak, SOLIDWORKS Flow Simulation, MATLAB]
+tags: [Thermal testing & simulation, Structural FEA, CFD, Testing & validation]
 doodle: ergon
 order: 0
 ---

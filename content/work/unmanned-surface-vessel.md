@@ -16,7 +16,7 @@ highlights:
 metrics:
   - { value: "500 kg", label: vessel launched by one person }
 tools: [MATLAB, PID control, Fabrication]  # TODO: add CAD software used
-tags: [marine, autonomy, simulation, design-for-manufacture]
+tags: [Simulation, Autonomy, Marine]
 doodle: usv
 featured: true
 order: 2

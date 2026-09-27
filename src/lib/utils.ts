@@ -16,6 +16,15 @@ export function formatMonth(value: string): string {
   return `${MONTHS[Number(month) - 1]} ${year}`;
 }
 
+/** "2024" → "2024"; "2024-05" → "May 2024" */
+export function formatDate(value: string): string {
+  return /^\d{4}$/.test(value) ? value : formatMonth(value);
+}
+
+/** Sort helper for YAML lists that keep their written order (education, skills, awards). */
+export const byPosition = (a: { data: { position: number } }, b: { data: { position: number } }) =>
+  a.data.position - b.data.position;
+
 export function formatRange(start: string, end: string): string {
   return `${formatMonth(start)} – ${formatMonth(end)}`;
 }

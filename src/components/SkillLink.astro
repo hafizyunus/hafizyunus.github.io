@@ -1,0 +1,22 @@
+---
+// A skill/tool/tag name that links to its /skills/ page when anything uses it.
+import { getSkills, skillHref } from '../lib/skills';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+const href = skillHref(await getSkills(), name);
+---
+
+{
+  href ? (
+    <a href={href} class:list={['underline decoration-rule underline-offset-2 hover:text-accent hover:decoration-accent', className]}>
+      {name}
+    </a>
+  ) : (
+    <span class={className}>{name}</span>
+  )
+}

@@ -1,0 +1,25 @@
+# Awards & achievements. Order here = order on the site (newest first reads best).
+# Each entry needs a unique `id`.
+#   date:  "YYYY" or "YYYY-MM" (in quotes)
+#   work:  optional: a file name from content/work/ (without .md) to link to the write-up
+#   note:  optional: one short line of context
+- id: pi-ev-2024
+  title: Second place, Pi-EV 2024
+  org: Formula Student concept challenge
+  date: "2024"
+  note: EV powertrain design, with NITKRacing.
+  work: nitkracing
+
+- id: techtatva-2023
+  title: Second place, TechTatva 2023
+  org: MIT Manipal
+  date: "2023"
+  note: Combat robotics, with our 15 kg vertical spinner.
+  work: combat-robot
+
+- id: robocon-2023
+  title: National stage, ABU Robocon 2023
+  org: Asia-Pacific robotics competition
+  date: "2023"
+  note: Qualified with a pair of semi-autonomous ring-shooting robots.
+  work: robocon

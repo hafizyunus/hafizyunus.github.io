@@ -46,9 +46,12 @@
 - [ ] Project case studies with images/diagrams, repo/demo links
 - [x] Galleries: photo albums with tags, thumbnails + full-screen viewer → [features/galleries.md](features/galleries.md)
 - [x] First real album (`robowars`): 4 photos, live
-- [ ] Tags linking skills ↔ roles ↔ projects
-- [ ] `/now` and `/uses` pages
-- [ ] Testimonials, certifications, awards, talks
+- [x] Skill pages: skills, tools and tags link to every work item and album that uses them (`/skills/`)
+- [ ] `/now` page: optional, deferred (the home page's auto "Currently" line covers most of it)
+- ~~`/uses` page~~: dropped 2026-09-27 (tools already on resume and work pages)
+- [x] Awards & achievements (`content/awards.yaml`, shown on the resume)
+- ~~Testimonials~~: dropped 2026-09-27
+- [ ] Certifications / talks (only if there are any to list)
 - [x] Optimised images (auto-resize to WebP, lazy-load)
 
 ## Phase 3 — Writing & engagement
