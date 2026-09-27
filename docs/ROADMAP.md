@@ -34,7 +34,8 @@
 - [x] Email obfuscated (`[at]`/`[dot]`, decoded in the browser)
 - [x] GitHub Actions deploy workflow (activates once the repo exists)
 - [x] [CONTENT-GUIDE.md](CONTENT-GUIDE.md) for non-code editing
-- [ ] Doodles placed in `src/assets/doodles/` + animated layers (owner, later)
+- [x] Page doodles #1–6 generated (`npm run doodles`), animated inside the SVGs → [design/DOODLES.md](design/DOODLES.md)
+- [ ] Work-item icons #7–13 and a gallery page doodle
 
 **Exit:** Lighthouse ≥ 95 everywhere; all sections driven by content files.
 ✅ Met 2026-09-27: performance 99, accessibility 100, best practices 100, SEO 100 on Home, Work, a work page, Resume, Contact. Phase 1 is complete apart from the owner's doodles.

@@ -1,7 +1,21 @@
 # Doodles plan
 
 Hand-drawn mechanical doodles give the site its personality (like tanqinghua.asia),
-while everything else stays quiet. Drawn by the owner.
+while everything else stays quiet.
+
+## Current set: generated (2026-09-27)
+The Priority 1 page doodles (#1–6) are **generated in code** by [`scripts/doodles.mjs`](../../scripts/doodles.mjs)
+with [rough.js](https://roughjs.com), the library behind Excalidraw's hand-drawn look:
+```bash
+npm run doodles      # writes src/assets/doodles/*.svg (same output every run)
+```
+- Shapes are described in the script (lines, rectangles, gears…); edit it and re-run to tweak a doodle.
+- **Animation lives inside each SVG** (CSS): gears turn, steam rises, the paper plane bobs.
+  No separate layer files are needed, and it stops for visitors who prefer reduced motion.
+- Dark mode inverts the black lines to light ones automatically.
+- **Replacing one with your own drawing:** save your SVG over `src/assets/doodles/<name>.svg` and
+  delete that entry from `DOODLES` in the script so `npm run doodles` doesn't overwrite it.
+  The Excalidraw guidance below still applies.
 
 ## How the reference does it (for context)
 - One small doodle per page, displayed ~150–250px wide, placed in white space (top-right / beside content).
@@ -66,4 +80,11 @@ the final versions into the site's assets.
 ## Status
 | # | Status |
 |---|---|
-| 1–13 | Not started |
+| 1 home | ✅ Generated: workbench, laptop with a vibration plot, calipers, wrench, turning gear |
+| 2 work | ✅ Generated: three meshing gears, all turning at matched speeds |
+| 3 about | ✅ Generated: notebook + pencil, glass of chai with rising steam |
+| 4 resume | ✅ Generated: clipboard with a stepped-shaft drawing and dimensions |
+| 5 contact | ✅ Generated: paper plane (bobbing) with a dashed loop trail |
+| 6 404 | ✅ Generated: snapped bolt |
+| gallery page | Not started (dev shows a placeholder) |
+| 7–13 work icons | Not started |
