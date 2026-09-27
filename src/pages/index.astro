@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { config } from '../lib/site';
+import { getWork, url } from '../lib/utils';
+
+const work = await getWork();
+const featured = work.filter((w) => w.data.featured);
+const current = work.find((w) => w.data.category === 'professional' && w.data.end === 'present');
+---
+
+<Base doodle="home" wide>
+  <section class="max-w-[42rem]">
+    <h1 class="font-serif text-4xl leading-tight tracking-tight sm:text-5xl">
+      Hi, I'm {config.person.name.split(' ')[0]}.
+    </h1>
+    <p class="mt-6 font-serif text-xl leading-relaxed text-ink/85 sm:text-2xl">{config.person.intro}</p>
+    {
+      current && (
+        <p class="mt-6 text-sm text-muted">
+          Currently: {current.data.role} at {current.data.org}, {config.person.location}
+        </p>
+      )
+    }
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section class="mt-16">
+        <div class="flex items-baseline justify-between">
+          <h2 class="font-serif text-2xl">Selected work</h2>
+          <a href={url('/work/')} class="text-sm text-muted hover:text-accent">
+            all work →
+          </a>
+        </div>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+          {featured.map((item) => (
+            <li>
+              <WorkCard item={item} />
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+</Base>

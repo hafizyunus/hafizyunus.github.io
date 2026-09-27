@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/utils';
+---
+
+<Base title="Not found" doodle="404">
+  <h1 class="font-serif text-4xl tracking-tight">Nothing here</h1>
+  <p class="mt-4 text-ink/75">
+    This page doesn't exist, or it's moved. Try the <a href={url('/work/')} class="text-accent underline underline-offset-4">work</a> page
+    or head <a href={url('/')} class="text-accent underline underline-offset-4">home</a>.
+  </p>
+</Base>

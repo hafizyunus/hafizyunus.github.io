@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { config } from '../lib/site';
+---
+
+<Base title="Contact" description={`Get in touch with ${config.person.name}.`} doodle="contact">
+  <h1 class="font-serif text-4xl tracking-tight">Contact</h1>
+  <p class="mt-6 text-lg leading-relaxed text-ink/85">{config.contact.message}</p>
+
+  <ul class="mt-10 space-y-4">
+    <li>
+      <span class="block text-xs uppercase tracking-widest text-muted">Email</span>
+      <a href={`mailto:${config.person.email}`} class="font-serif text-2xl text-accent hover:underline">
+        {config.person.email}
+      </a>
+    </li>
+    {
+      config.socials
+        .filter((s) => !s.url.startsWith('mailto:'))
+        .map((s) => (
+          <li>
+            <span class="block text-xs uppercase tracking-widest text-muted">{s.label}</span>
+            <a href={s.url} class="font-serif text-2xl text-accent hover:underline" rel="me">
+              {s.url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+            </a>
+          </li>
+        ))
+    }
+  </ul>
+</Base>

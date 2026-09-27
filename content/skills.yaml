@@ -1,0 +1,28 @@
+# Skill groups. Order here = order on the site. Each group needs a unique `id`.
+- id: core
+  label: Core competencies
+  items:
+    - Vibration data processing & analysis
+    - Robotics mechanism design
+    - Bolted joint analysis
+    - Structural FEA
+    - Thermal testing & simulation
+    - Automotive mechanical design
+
+- id: tools
+  label: Tools
+  items:
+    - Creo Parametric
+    - SOLIDWORKS
+    - Ansys Mechanical
+    - Ansys Fluent
+    - Ansys Icepak
+    - Simulink
+    - Claude Code
+
+- id: languages
+  label: Languages
+  items:
+    - MATLAB
+    - Arduino C
+    - Python

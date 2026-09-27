@@ -1,0 +1,52 @@
+# ─────────────────────────────────────────────────────────────
+#  Site settings: the control panel for the whole website.
+#  Edit values here; no code changes needed. See docs/CONTENT-GUIDE.md
+# ─────────────────────────────────────────────────────────────
+
+site:
+  url: https://hafizyunus.github.io   # the live address (see docs/decisions/0002)
+  basePath: ""                         # leave empty for <username>.github.io sites
+  title: Hafiz Yunus
+  description: "Mechanical engineer: vibration analysis, structural FEA and hands-on vehicle and robot design."
+  language: en
+
+person:
+  name: Hafiz Yunus                    # shown in the sidebar and page titles
+  fullName: Hafiz Yunus Kalathil       # shown on the resume page
+  headline: Mechanical engineer
+  location: Bangalore, India
+  # Short intro on the home page. Keep it to 2–3 sentences.
+  intro: >-
+    I'm a mechanical engineer at Caterpillar, where I analyse vibration and strain data
+    to validate new generator sets. Before that, I spent my university years designing
+    and building race cars, competition robots and an autonomous boat.
+  email: hafiz.yunus.318@gmail.com
+  # Public PDF of your resume, placed in the /public folder, e.g. /resume.pdf
+  # Leave empty ("") to hide the download button.
+  resumePdf: ""
+
+# Sidebar menu. Order here = order on the site. Delete a line to hide a page from the menu.
+nav:
+  - { label: work, href: /work/ }
+  - { label: about, href: /about/ }
+  - { label: resume, href: /resume/ }
+  - { label: contact, href: /contact/ }
+
+# Links shown in the sidebar footer and on the contact page. Add or remove freely.
+socials:
+  - { label: LinkedIn, url: "https://www.linkedin.com/in/hafiz-yunus/" }
+  - { label: Email, url: "mailto:hafiz.yunus.318@gmail.com" }
+  # - { label: GitHub, url: "https://github.com/hafizyunus" }
+
+# Groups on the /work page. Every file in content/work/ must use one of these ids
+# as its `category`. Order here = order on the page.
+work:
+  categories:
+    - { id: professional, label: Professional experience }
+    - { id: activity, label: Teams & activities }
+    - { id: project, label: Projects }
+
+contact:
+  message: >-
+    The best way to reach me is email. I'm happy to talk about vibration analysis,
+    FEA, Formula Student, robotics, or anything you've read here.

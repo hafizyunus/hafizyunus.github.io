@@ -1,0 +1,8 @@
+# Education, newest first. Each entry needs a unique `id`.
+- id: nitk
+  school: National Institute of Technology Karnataka
+  degree: B.Tech, Mechanical Engineering
+  location: Surathkal, India
+  start: "2021"
+  end: "2025"
+  grade: "GPA 8.23 / 10"

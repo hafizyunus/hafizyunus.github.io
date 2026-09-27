@@ -4,7 +4,8 @@
 |---|---|
 | [BRIEF.md](BRIEF.md) | Who the site is for, tone, key content decisions |
 | [ROADMAP.md](ROADMAP.md) | Phased plan and progress |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Folder layout & content model (how config-driven editing works) |
+| [CONTENT-GUIDE.md](CONTENT-GUIDE.md) | **How to add, edit and remove content** |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Folder layout, routes & content model |
 | [OPEN-QUESTIONS.md](OPEN-QUESTIONS.md) | Decisions still needed |
 | [design/DIRECTIVE.md](design/DIRECTIVE.md) | The design rules, tokens and page patterns for the site |
 | [design/DOODLES.md](design/DOODLES.md) | Hand-drawn doodle list, specs and how to make them |

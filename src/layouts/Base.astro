@@ -1,0 +1,106 @@
+---
+// Page shell: fixed left sidebar on wide screens, top bar on phones.
+import '../styles/global.css';
+import Doodle from '../components/Doodle.astro';
+import { config } from '../lib/site';
+import { url } from '../lib/utils';
+
+interface Props {
+  title?: string;
+  description?: string;
+  doodle?: string; // page doodle shown top-right
+  wide?: boolean; // wider column for grid/index pages
+}
+
+const { title, description = config.site.description, doodle, wide = false } = Astro.props;
+const pageTitle = title ? `${title} · ${config.person.name}` : `${config.person.name} · ${config.person.headline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => {
+  const target = url(href).replace(/\/$/, '');
+  return path === target || path.startsWith(`${target}/`);
+};
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang={config.site.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+  </head>
+  <body class="min-h-screen">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to content</a>
+
+    <div class="mx-auto flex max-w-6xl flex-col lg:flex-row">
+      <!-- Sidebar -->
+      <header
+        class="no-print flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 px-5 pb-2 pt-6 lg:sticky lg:top-0 lg:h-screen lg:w-56 lg:shrink-0 lg:flex-col lg:flex-nowrap lg:justify-start lg:px-10 lg:pt-14"
+      >
+        <a href={url('/')} class="whitespace-nowrap font-serif text-xl tracking-tight no-underline lg:text-2xl">
+          {config.person.name.toLowerCase()}.
+        </a>
+        <nav aria-label="Main" class="lg:mt-10">
+          <ul class="flex gap-3 text-sm sm:gap-4 lg:flex-col lg:gap-2.5">
+            {
+              config.nav.map((item) => (
+                <li>
+                  <a
+                    href={url(item.href)}
+                    class="nav-link hover:text-accent"
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <footer class="mt-auto hidden pb-10 text-xs leading-relaxed text-muted lg:block">
+          <ul class="mb-3 space-y-1">
+            {
+              config.socials.map((s) => (
+                <li>
+                  <a href={s.url} class="hover:text-accent" rel="me">
+                    {s.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+          © {year} {config.person.name}
+        </footer>
+      </header>
+
+      <!-- Content -->
+      <main id="main" class="relative min-w-0 flex-1 px-5 pb-24 pt-6 lg:px-12 lg:pt-14">
+        {
+          doodle && (
+            <div class="no-print pointer-events-none absolute right-6 top-8 hidden xl:block">
+              <Doodle name={doodle} size={180} />
+            </div>
+          )
+        }
+        <div class:list={[wide ? 'max-w-3xl' : 'max-w-[42rem]']}>
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <footer class="no-print px-5 pb-8 text-xs text-muted lg:hidden">
+      © {year} {config.person.name} ·
+      {config.socials.map((s, i) => <>{i > 0 && ' · '}<a href={s.url} class="hover:text-accent">{s.label}</a></>)}
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Doodle from '../../components/Doodle.astro';
+import { config } from '../../lib/site';
+import { formatRange, getWork, url, type Work } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const work = await getWork();
+  return work.map((item, i) => ({
+    params: { slug: item.id },
+    props: { item, prev: work[i - 1], next: work[i + 1] },
+  }));
+}
+
+interface Props {
+  item: Work;
+  prev?: Work;
+  next?: Work;
+}
+
+const { item, prev, next } = Astro.props;
+const { data } = item;
+const { Content } = await render(item);
+const categoryLabel = config.work.categories.find((c) => c.id === data.category)?.label;
+---
+
+<Base title={data.title} description={data.summary}>
+  <article>
+    <a href={url('/work/')} class="no-print text-sm text-muted hover:text-accent">← work</a>
+
+    <header class="mt-8">
+      {data.doodle && <Doodle name={data.doodle} size={80} class="mb-4" />}
+      <p class="text-xs font-medium uppercase tracking-widest text-muted">{categoryLabel}</p>
+      <h1 class="mt-2 font-serif text-4xl leading-tight tracking-tight">{data.title}</h1>
+      <p class="mt-3 text-ink/75">
+        {data.role} · {data.org}
+        <br />
+        <span class="text-sm text-muted">
+          {formatRange(data.start, data.end)}{data.location && ` · ${data.location}`}
+        </span>
+      </p>
+    </header>
+
+    <!-- At a glance: key facts for readers who skim -->
+    <aside class="mt-8 rounded-lg bg-accent-soft/60 p-5 text-sm leading-relaxed">
+      {
+        data.metrics.length > 0 && (
+          <dl class="mb-4 flex flex-wrap gap-x-8 gap-y-3">
+            {data.metrics.map((m) => (
+              <div>
+                <dt class="sr-only">{m.label}</dt>
+                <dd class="font-mono text-2xl text-accent">{m.value}</dd>
+                <dd class="text-xs text-muted">{m.label}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+      <ul class="list-disc space-y-1.5 pl-4">
+        {data.highlights.map((h) => <li>{h}</li>)}
+      </ul>
+      {
+        data.tools.length > 0 && (
+          <p class="mt-4 text-xs text-muted">
+            <span class="font-medium text-ink/70">Tools & methods:</span> {data.tools.join(' · ')}
+          </p>
+        )
+      }
+    </aside>
+
+    {
+      data.cover && (
+        <figure class="mt-10">
+          <Image src={data.cover} alt={data.coverAlt ?? ''} class="w-full rounded" widths={[680, 1360]} sizes="(min-width: 768px) 680px, 100vw" />
+          {data.coverAlt && <figcaption class="mt-2 text-sm text-muted">{data.coverAlt}</figcaption>}
+        </figure>
+      )
+    }
+
+    <div class="prose mt-10">
+      <Content />
+    </div>
+
+    <nav aria-label="More work" class="no-print mt-20 grid gap-4 border-t border-rule pt-6 text-sm sm:grid-cols-2">
+      {
+        prev ? (
+          <a href={url(`/work/${prev.id}/`)} class="group">
+            <span class="text-muted">← previous</span>
+            <span class="block group-hover:text-accent">{prev.data.title}</span>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a href={url(`/work/${next.id}/`)} class="group sm:text-right">
+            <span class="text-muted">next →</span>
+            <span class="block group-hover:text-accent">{next.data.title}</span>
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>

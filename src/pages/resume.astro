@@ -1,0 +1,104 @@
+---
+// Web resume built from the same content files as the rest of the site.
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { config } from '../lib/site';
+import { formatRange, getWorkByCategory, url } from '../lib/utils';
+
+const groups = await getWorkByCategory();
+const byPosition = (a: { data: { position: number } }, b: { data: { position: number } }) =>
+  a.data.position - b.data.position;
+const education = (await getCollection('education')).sort(byPosition);
+const skills = (await getCollection('skills')).sort(byPosition);
+const { person } = config;
+---
+
+<Base title="Resume" description={`Resume of ${person.fullName}, ${person.headline}.`} doodle="resume">
+  <header class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="font-serif text-4xl tracking-tight">{person.fullName}</h1>
+      <p class="mt-2 flex flex-wrap gap-x-3 text-sm text-muted">
+        <span>{person.headline}</span>
+        <span>{person.location}</span>
+        <a href={`mailto:${person.email}`} class="hover:text-accent">{person.email}</a>
+      </p>
+    </div>
+    <div class="no-print flex gap-4 text-sm">
+      {
+        person.resumePdf && (
+          <a href={url(person.resumePdf)} class="text-accent underline underline-offset-4" download>
+            Download PDF
+          </a>
+        )
+      }
+      <button type="button" onclick="window.print()" class="text-muted hover:text-accent">Print</button>
+    </div>
+  </header>
+
+  <section class="mt-12">
+    <h2 class="border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">Education</h2>
+    {
+      education.map(({ data }) => (
+        <div class="mt-4 flex flex-wrap justify-between gap-x-4">
+          <div>
+            <p class="font-medium">{data.school}</p>
+            <p class="text-sm text-ink/75">
+              {data.degree}
+              {data.grade && ` · ${data.grade}`}
+            </p>
+          </div>
+          <p class="text-sm text-muted">
+            {data.start} – {data.end}
+            {data.location && ` · ${data.location}`}
+          </p>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="mt-10">
+    <h2 class="border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">Skills</h2>
+    <dl class="mt-4 space-y-2 text-sm">
+      {
+        skills.map(({ data }) => (
+          <div class="sm:flex sm:gap-4">
+            <dt class="shrink-0 font-medium sm:w-40">{data.label}</dt>
+            <dd class="text-ink/75">{data.items.join(', ')}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  {
+    groups.map((group) => (
+      <section class="mt-10">
+        <h2 class="border-b border-rule pb-1 text-xs font-medium uppercase tracking-widest text-muted">{group.label}</h2>
+        {group.items.map((item) => (
+          <div class="mt-5">
+            <div class="flex flex-wrap justify-between gap-x-4">
+              <p class="font-medium">
+                <a href={url(`/work/${item.id}/`)} class="hover:text-accent">
+                  {item.data.org}
+                </a>
+              </p>
+              <p class="text-sm text-muted">{formatRange(item.data.start, item.data.end)}</p>
+            </div>
+            <p class="text-sm italic text-ink/75">
+              {item.data.role}
+              {item.data.location && ` · ${item.data.location}`}
+            </p>
+            <ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
+              {item.data.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+            <a href={url(`/work/${item.id}/`)} class="no-print mt-1 inline-block text-xs text-accent">
+              read more →
+            </a>
+          </div>
+        ))}
+      </section>
+    ))
+  }
+</Base>
