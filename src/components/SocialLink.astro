@@ -1,5 +1,5 @@
 ---
-// A link from site.yaml → socials. mailto: links are obfuscated via <Email>.
+// A link from site.yaml → socials. `url: email` links to your (obfuscated) email via <Email>.
 import Email from './Email.astro';
 
 interface Props {
@@ -12,8 +12,8 @@ const { label, href, class: className } = Astro.props;
 ---
 
 {
-  href.startsWith('mailto:') ? (
-    <Email address={href.slice('mailto:'.length)} label={label} class={className} />
+  href === 'email' ? (
+    <Email label={label} class={className} />
   ) : (
     <a href={href} class={className} rel="me">
       {label}

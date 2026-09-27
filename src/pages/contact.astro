@@ -11,11 +11,11 @@ import { config } from '../lib/site';
   <ul class="mt-10 space-y-4">
     <li>
       <span class="block text-xs uppercase tracking-widest text-muted">Email</span>
-      <Email address={config.person.email} class="font-serif text-2xl text-accent hover:underline" />
+      <Email class="font-serif text-2xl text-accent hover:underline" />
     </li>
     {
       config.socials
-        .filter((s) => !s.url.startsWith('mailto:'))
+        .filter((s) => s.url !== 'email')
         .map((s) => (
           <li>
             <span class="block text-xs uppercase tracking-widest text-muted">{s.label}</span>

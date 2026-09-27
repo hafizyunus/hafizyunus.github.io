@@ -52,7 +52,7 @@
 - **YAML list order is preserved** (education, skills) via a `position` added at load time.
 - **URL in one place:** `site.url` / `site.basePath` in `site.yaml` feed `astro.config.mjs`
   (canonical links, sitemap).
-- **Email obfuscation:** `<Email>` writes the address base64-encoded and reversed; a tiny script builds the `mailto:` link in the browser. Visible text uses `[at]`/`[dot]`.
+- **Email obfuscation:** the address is stored encoded (reversed + base64) in `site.yaml` (`npm run encode-email`) and written that way into pages; a tiny script builds the `mailto:` link in the browser. Visible text uses `[at]`/`[dot]`.
 - **Dark mode:** `<html data-theme="dark">` overrides the colour tokens in `global.css`; an inline script in `<head>` applies the saved choice before paint. Light is the default and printing is always light.
 - **Doodles are optional.** Missing doodles show a dashed placeholder in `npm run dev` and
   nothing on the live site.

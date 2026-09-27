@@ -14,7 +14,7 @@ names the file and field.
 ## Where everything lives
 | I want to change… | Edit |
 |---|---|
-| Name, intro, email, menu, social links | [`content/site.yaml`](../content/site.yaml) |
+| Name, intro, menu, social links (email: see below) | [`content/site.yaml`](../content/site.yaml) |
 | A job, team or project | a file in [`content/work/`](../content/work) |
 | About page | [`content/pages/about.md`](../content/pages/about.md) |
 | Education | [`content/education.yaml`](../content/education.yaml) |
@@ -23,9 +23,13 @@ names the file and field.
 | Doodles | `src/assets/doodles/<name>.svg` (see [design/DOODLES.md](design/DOODLES.md)) |
 
 ## Things that happen automatically
-- **Email address** is never written plainly into the site's HTML. It's shown as
-  `name [at] gmail [dot] com` and becomes a clickable link in the visitor's browser. Just keep
-  `person.email` (and any `mailto:` link in `socials`) up to date in `site.yaml`.
+- **Email address** is never written plainly in this repo or the site's HTML. `site.yaml` stores
+  it encoded (`person.emailEncoded`); the site shows `name [at] gmail [dot] com`, which becomes a
+  clickable link in the visitor's browser. To change it:
+  ```bash
+  npm run encode-email -- new.address@example.com
+  ```
+  and paste the printed value into `site.yaml`. In `socials`, `url: email` links to it.
 - **Share image** (`/og.png`, shown when the link is posted on LinkedIn/WhatsApp) is generated
   from `person.name` and `site.description` in `site.yaml`.
 - **Dark mode**: visitors can switch with the small moon/sun button; light is the default.

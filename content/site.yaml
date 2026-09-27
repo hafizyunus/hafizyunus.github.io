@@ -20,7 +20,11 @@ person:
     I'm a mechanical engineer at Caterpillar, where I analyse vibration and strain data
     to validate new generator sets. Before that, I spent my university years designing
     and building race cars, competition robots and an autonomous boat.
-  email: hafiz.yunus.318@gmail.com
+  # Your email, encoded so the plain address isn't in this public repo or the site's HTML.
+  # The site shows it as "name [at] gmail [dot] com". To change it, run:
+  #   npm run encode-email -- new.address@example.com
+  # and paste the result here.
+  emailEncoded: "bW9jLmxpYW1nQDgxMy5zdW51eS56aWZhaA=="
   # Public PDF of your resume, placed in the /public folder, e.g. /resume.pdf
   # Leave empty ("") to hide the download button.
   resumePdf: /resume.pdf
@@ -35,7 +39,7 @@ nav:
 # Links shown in the sidebar footer and on the contact page. Add or remove freely.
 socials:
   - { label: LinkedIn, url: "https://www.linkedin.com/in/hafiz-yunus/" }
-  - { label: Email, url: "mailto:hafiz.yunus.318@gmail.com" }
+  - { label: Email, url: email }      # the word "email" links to person.emailEncoded
   # - { label: GitHub, url: "https://github.com/hafizyunus" }
 
 # Groups on the /work page. Every file in content/work/ must use one of these ids

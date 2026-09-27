@@ -20,7 +20,9 @@ const siteSchema = z.object({
     headline: z.string(),
     location: z.string(),
     intro: z.string(),
-    email: z.email(),
+    emailEncoded: z.string().refine((v) => z.email().safeParse(decodeEmail(v)).success, {
+      message: 'Not a valid encoded email. Run: npm run encode-email -- you@example.com',
+    }),
     resumePdf: z.string().default(''),
   }),
   nav: z.array(z.object({ label: z.string(), href: z.string() })),
@@ -30,6 +32,11 @@ const siteSchema = z.object({
   }),
   contact: z.object({ message: z.string() }),
 });
+
+/** Reverses `npm run encode-email`: base64 → reversed address → address. */
+export function decodeEmail(encoded: string): string {
+  return [...Buffer.from(encoded, 'base64').toString('utf8')].reverse().join('');
+}
 
 export type SiteConfig = z.infer<typeof siteSchema>;
 
