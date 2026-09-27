@@ -2,6 +2,8 @@
 // Page shell: fixed left sidebar on wide screens, top bar on phones.
 import '../styles/global.css';
 import Doodle from '../components/Doodle.astro';
+import SocialLink from '../components/SocialLink.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
 import { config } from '../lib/site';
 import { url } from '../lib/utils';
 
@@ -21,6 +23,7 @@ const isActive = (href: string) => {
   return path === target || path.startsWith(`${target}/`);
 };
 const year = new Date().getFullYear();
+const ogImage = new URL(url('/og.png'), Astro.site);
 ---
 
 <!doctype html>
@@ -37,10 +40,20 @@ const year = new Date().getFullYear();
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Apply a saved dark-mode choice before the page paints (light is the default) -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem('theme') === 'dark') document.documentElement.dataset.theme = 'dark';
+      } catch {}
+    </script>
   </head>
   <body class="min-h-screen">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-paper focus:px-3 focus:py-2 focus:text-sm focus:shadow">Skip to content</a>
 
     <div class="mx-auto flex max-w-6xl flex-col lg:flex-row">
       <!-- Sidebar -->
@@ -50,7 +63,8 @@ const year = new Date().getFullYear();
         <a href={url('/')} class="whitespace-nowrap font-serif text-xl tracking-tight no-underline lg:text-2xl">
           {config.person.name.toLowerCase()}.
         </a>
-        <nav aria-label="Main" class="lg:mt-10">
+        <div class="flex items-center gap-3 lg:mt-10 lg:flex-col lg:items-start lg:gap-6">
+        <nav aria-label="Main">
           <ul class="flex gap-3 text-sm sm:gap-4 lg:flex-col lg:gap-2.5">
             {
               config.nav.map((item) => (
@@ -67,14 +81,14 @@ const year = new Date().getFullYear();
             }
           </ul>
         </nav>
+        <ThemeToggle />
+        </div>
         <footer class="mt-auto hidden pb-10 text-xs leading-relaxed text-muted lg:block">
           <ul class="mb-3 space-y-1">
             {
               config.socials.map((s) => (
                 <li>
-                  <a href={s.url} class="hover:text-accent" rel="me">
-                    {s.label}
-                  </a>
+                  <SocialLink label={s.label} href={s.url} class="hover:text-accent" />
                 </li>
               ))
             }
@@ -100,7 +114,7 @@ const year = new Date().getFullYear();
 
     <footer class="no-print px-5 pb-8 text-xs text-muted lg:hidden">
       © {year} {config.person.name} ·
-      {config.socials.map((s, i) => <>{i > 0 && ' · '}<a href={s.url} class="hover:text-accent">{s.label}</a></>)}
+      {config.socials.map((s, i) => <>{i > 0 && ' · '}<SocialLink label={s.label} href={s.url} class="hover:text-accent" /></>)}
     </footer>
   </body>
 </html>

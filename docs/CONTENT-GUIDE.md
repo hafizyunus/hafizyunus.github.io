@@ -19,8 +19,16 @@ names the file and field.
 | About page | [`content/pages/about.md`](../content/pages/about.md) |
 | Education | [`content/education.yaml`](../content/education.yaml) |
 | Skills | [`content/skills.yaml`](../content/skills.yaml) |
-| Resume PDF | put the file in `public/` (e.g. `public/resume.pdf`) and set `person.resumePdf: /resume.pdf` |
+| Resume PDF | **replace `public/resume.pdf`** with the new file, keeping the same name (the URL stays the same). Visitors download it as `Hafiz_Yunus_Kalathil_Resume.pdf`. Keep versions with your phone number in `_inbox/`, never in `public/` |
 | Doodles | `src/assets/doodles/<name>.svg` (see [design/DOODLES.md](design/DOODLES.md)) |
+
+## Things that happen automatically
+- **Email address** is never written plainly into the site's HTML. It's shown as
+  `name [at] gmail [dot] com` and becomes a clickable link in the visitor's browser. Just keep
+  `person.email` (and any `mailto:` link in `socials`) up to date in `site.yaml`.
+- **Share image** (`/og.png`, shown when the link is posted on LinkedIn/WhatsApp) is generated
+  from `person.name` and `site.description` in `site.yaml`.
+- **Dark mode**: visitors can switch with the small moon/sun button; light is the default.
 
 ## Work items (`content/work/*.md`)
 Each file = one card on the Work page + one detail page at `/work/<file-name>/`.

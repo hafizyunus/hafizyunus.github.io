@@ -1,0 +1,41 @@
+---
+// Small light/dark switch. Light is the default; the choice is remembered per browser.
+// The theme is applied before first paint by the inline script in Base.astro.
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  aria-pressed="false"
+  aria-label="Dark mode"
+  title="Toggle dark mode"
+  class="inline-grid size-7 place-items-center rounded-full text-muted transition-colors hover:text-accent"
+>
+  <!-- moon: shown in light mode -->
+  <svg class="theme-icon-moon size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path>
+  </svg>
+  <!-- sun: shown in dark mode -->
+  <svg class="theme-icon-sun size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const root = document.documentElement;
+  const sync = () => button?.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+  sync();
+  button?.addEventListener('click', () => {
+    const dark = root.dataset.theme !== 'dark';
+    if (dark) root.dataset.theme = 'dark';
+    else delete root.dataset.theme;
+    try {
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    } catch {
+      // storage unavailable (private mode): the toggle still works for this page view
+    }
+    sync();
+  });
+</script>

@@ -16,6 +16,31 @@
   --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
 }
 
+/* Dark mode: opt-in via the toggle (sets <html data-theme="dark">). Light is the default. */
+:root {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-paper: #151514;
+  --color-ink: #e6e3dd;
+  --color-muted: #9d998f;
+  --color-rule: #2f2e2b;
+  --color-accent: #82b8a6;
+  --color-accent-soft: #1c2825;
+}
+/* Black hand-drawn lines → light lines on the dark background */
+:root[data-theme='dark'] .doodle {
+  filter: invert(1);
+}
+.theme-icon-sun,
+:root[data-theme='dark'] .theme-icon-moon {
+  display: none;
+}
+:root[data-theme='dark'] .theme-icon-sun {
+  display: block;
+}
+
 @layer base {
   html {
     background: var(--color-paper);
@@ -116,5 +141,15 @@
 @media print {
   .no-print {
     display: none !important;
+  }
+  /* Always print light, even if dark mode is on */
+  :root[data-theme='dark'] {
+    color-scheme: light;
+    --color-paper: #ffffff;
+    --color-ink: #1a1a1a;
+    --color-muted: #6f6c68;
+    --color-rule: #e8e6e1;
+    --color-accent: #2f5d50;
+    --color-accent-soft: #eef3f1;
   }
 }

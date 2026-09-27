@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Email from '../components/Email.astro';
 import { config } from '../lib/site';
 ---
 
@@ -10,9 +11,7 @@ import { config } from '../lib/site';
   <ul class="mt-10 space-y-4">
     <li>
       <span class="block text-xs uppercase tracking-widest text-muted">Email</span>
-      <a href={`mailto:${config.person.email}`} class="font-serif text-2xl text-accent hover:underline">
-        {config.person.email}
-      </a>
+      <Email address={config.person.email} class="font-serif text-2xl text-accent hover:underline" />
     </li>
     {
       config.socials

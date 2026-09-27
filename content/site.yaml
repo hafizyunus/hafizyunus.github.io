@@ -23,7 +23,7 @@ person:
   email: hafiz.yunus.318@gmail.com
   # Public PDF of your resume, placed in the /public folder, e.g. /resume.pdf
   # Leave empty ("") to hide the download button.
-  resumePdf: ""
+  resumePdf: /resume.pdf
 
 # Sidebar menu. Order here = order on the site. Delete a line to hide a page from the menu.
 nav:

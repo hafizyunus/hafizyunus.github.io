@@ -17,7 +17,7 @@
 ├─ public/                     ← served as-is (favicon, robots.txt, resume PDF, CNAME later)
 ├─ src/
 │  ├─ assets/doodles/          ← hand-drawn SVG doodles
-│  ├─ components/              ← Doodle, WorkCard
+│  ├─ components/              ← Doodle, WorkCard, Email, SocialLink, ThemeToggle
 │  ├─ layouts/Base.astro       ← page shell: sidebar/top bar, SEO tags
 │  ├─ lib/site.ts              ← loads + validates site.yaml
 │  ├─ lib/utils.ts             ← dates, URLs, sorted/grouped work
@@ -37,6 +37,8 @@
 | `/about/` | `pages/about.astro` | `content/pages/about.md` |
 | `/resume/` | `pages/resume.astro` | education + skills + all work highlights; print-friendly |
 | `/contact/` | `pages/contact.astro` | `site.yaml` email, socials, contact message |
+| `/og.png` | `pages/og.png.ts` | share image rendered at build time (satori + resvg) from `site.yaml` |
+| `/resume.pdf` | `public/resume.pdf` | copied as-is |
 | 404 | `pages/404.astro` | — |
 
 ## Design decisions in the model
@@ -50,5 +52,7 @@
 - **YAML list order is preserved** (education, skills) via a `position` added at load time.
 - **URL in one place:** `site.url` / `site.basePath` in `site.yaml` feed `astro.config.mjs`
   (canonical links, sitemap).
+- **Email obfuscation:** `<Email>` writes the address base64-encoded and reversed; a tiny script builds the `mailto:` link in the browser. Visible text uses `[at]`/`[dot]`.
+- **Dark mode:** `<html data-theme="dark">` overrides the colour tokens in `global.css`; an inline script in `<head>` applies the saved choice before paint. Light is the default and printing is always light.
 - **Doodles are optional.** Missing doodles show a dashed placeholder in `npm run dev` and
   nothing on the live site.

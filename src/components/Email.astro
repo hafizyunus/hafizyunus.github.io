@@ -1,0 +1,25 @@
+---
+// Email link that scrapers can't read from the HTML.
+// Visible text: "name [at] gmail [dot] com" (or a custom label).
+// The address is stored encoded and only turned into a mailto: link in the browser.
+import { url } from '../lib/utils';
+
+interface Props {
+  address: string;
+  label?: string; // show this instead of the obfuscated address, e.g. "Email"
+  class?: string;
+}
+
+const { address, label, class: className } = Astro.props;
+const [user, domain] = address.split('@');
+const shown = label ?? `${user} [at] ${domain.replaceAll('.', ' [dot] ')}`;
+const encoded = Buffer.from([...address].reverse().join('')).toString('base64');
+---
+
+<a href={url('/contact/')} data-email={encoded} class:list={['js-email', className]}>{shown}</a>
+
+<script>
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('a.js-email[data-email]')) {
+    link.href = `mailto:${[...atob(link.dataset.email ?? '')].reverse().join('')}`;
+  }
+</script>

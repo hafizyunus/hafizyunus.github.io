@@ -2,6 +2,7 @@
 // Web resume built from the same content files as the rest of the site.
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Email from '../components/Email.astro';
 import { config } from '../lib/site';
 import { formatRange, getWorkByCategory, url } from '../lib/utils';
 
@@ -11,6 +12,8 @@ const byPosition = (a: { data: { position: number } }, b: { data: { position: nu
 const education = (await getCollection('education')).sort(byPosition);
 const skills = (await getCollection('skills')).sort(byPosition);
 const { person } = config;
+// File name used when someone downloads the PDF, e.g. Hafiz_Yunus_Kalathil_Resume.pdf
+const pdfName = `${person.fullName.replaceAll(' ', '_')}_Resume.pdf`;
 ---
 
 <Base title="Resume" description={`Resume of ${person.fullName}, ${person.headline}.`} doodle="resume">
@@ -20,13 +23,13 @@ const { person } = config;
       <p class="mt-2 flex flex-wrap gap-x-3 text-sm text-muted">
         <span>{person.headline}</span>
         <span>{person.location}</span>
-        <a href={`mailto:${person.email}`} class="hover:text-accent">{person.email}</a>
+        <Email address={person.email} class="hover:text-accent" />
       </p>
     </div>
     <div class="no-print flex gap-4 text-sm">
       {
         person.resumePdf && (
-          <a href={url(person.resumePdf)} class="text-accent underline underline-offset-4" download>
+          <a href={url(person.resumePdf)} class="text-accent underline underline-offset-4" download={pdfName}>
             Download PDF
           </a>
         )
