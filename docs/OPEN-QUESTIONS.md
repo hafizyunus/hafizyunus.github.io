@@ -15,8 +15,8 @@ Answer inline; resolved items are recorded in [BRIEF.md](BRIEF.md) or an ADR.
 - ~~Content source~~ → Resume in `_inbox/`, drafted by Claude, reviewed by owner
 
 ## Still open
-1. **Visual direction**: review [design/REFERENCES.md](design/REFERENCES.md), pick direction A/B/C/D or a mix.
-2. Colour preferences / anything to avoid?
+1. ~~Visual direction~~ → [design/DIRECTIVE.md](design/DIRECTIVE.md)
+2. ~~Colour~~ → forest green `#2F5D50` on white
 3. Which roles/projects deserve full write-ups (detail pages)? *(after resume draft)*
 4. Any confidential/NDA work to describe vaguely or omit? *(after resume draft)*
 5. Which project visuals do you have: CAD renders, photos, drawings, simulation plots? Any shareable?

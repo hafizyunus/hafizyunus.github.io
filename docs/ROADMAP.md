@@ -15,7 +15,8 @@
 - [x] Resume placed in `_inbox/`
 - [ ] Claude drafts content files from resume → owner review
 - [ ] Gather project visuals (CAD renders, photos, drawings, plots)
-- [ ] Visual direction: pick from [design/REFERENCES.md](design/REFERENCES.md)
+- [x] Visual direction → [design/DIRECTIVE.md](design/DIRECTIVE.md) (forest green, Newsreader, white)
+- [ ] Doodles #1–3 drawn → [design/DOODLES.md](design/DOODLES.md) (placeholders until then; non-blocking)
 
 ## Phase 1 — MVP (runs locally, deployable once URL is chosen)
 - [ ] Scaffold Astro + TypeScript + Tailwind, lint/format

@@ -1,6 +1,6 @@
 # Design directive
 
-- **Status:** Proposed (2026-09-27)
+- **Status:** Accepted (2026-09-27)
 - **One-liner:** *A quiet white notebook with a left-hand index: serif headings, clean text-and-image pages, and dense only where you're browsing work.*
 
 ## Where each reference applies
@@ -34,25 +34,19 @@ where people browse many items. Density comes from tighter card grids, not from 
 ## Draft tokens
 | Token | Value (draft) | Notes |
 |---|---|---|
-| Background | `#FFFFFF` | Option: warm off-white `#FAFAF8` (Maggie-like) |
-| Text | `#2B2B29` | Warm near-black |
+| Background | `#FFFFFF` ✅ | Same as tanqinghua.asia (it's pure white; the softness comes from `#1A1A1A` text + light doodles) |
+| Text | `#1A1A1A` ✅ | Same as tanqinghua.asia |
 | Muted text | `#6F6C68` | Dates, captions, meta |
 | Rule/border | `#E8E6E1` | Hairlines only |
-| Accent | **TBD**: see options below | |
-| Heading font | **Newsreader** (Google Fonts, free) | Closest free match to Maggie's *Canela Deck* (paid). Alternatives: *Fraunces*, *Instrument Serif* |
-| Body font | **Lato** or **Inter** | Maggie uses Lato; Inter is crisper at small sizes |
+| Accent | **Forest green `#2F5D50`** ✅ | Links, active nav, key metrics |
+| Heading font | **Newsreader** ✅ (Google Fonts, free) | Closest free match to Maggie's *Canela Deck* |
+| Body font | **Inter** (default) | Same as tanqinghua.asia; crisp at small sizes. Lato (Maggie) is the alternative |
 | Mono | **JetBrains Mono** / **IBM Plex Mono** | Metrics, units, specs (e.g. `15 kg`, `FoS 2.5`) |
 | Body size | 17–18px, line-height 1.6 | |
 | Reading width | ~680px | |
 | Sidebar width | ~200px, fixed on ≥1024px screens | |
 
-### Accent colour options
-| Option | Hex | Feel |
-|---|---|---|
-| Ink blue | `#1F4E79` | Technical drawing / engineering ink |
-| Oxide red | `#B4432F` | Warm, like primer / marking paint |
-| Forest green | `#2F5D50` | Calm, grown-up |
-| Signal orange | `#D9731A` | Energetic; motorsport / safety orange |
+Accent options considered: ink blue `#1F4E79`, oxide red `#B4432F`, **forest green `#2F5D50` (chosen)**, signal orange `#D9731A`.
 
 ## Page map
 | Page | Pattern |
@@ -64,8 +58,8 @@ where people browse many items. Density comes from tighter card grids, not from 
 | Resume | Clean web resume + PDF download, print-friendly |
 | Contact | Email + LinkedIn, one sentence |
 
-## Still to decide
-- [ ] Accent colour
-- [ ] Heading font (Newsreader / Fraunces / Instrument Serif), best judged in the prototype
-- [ ] Pure white vs warm off-white
-- [ ] Hand-drawn doodles: yes (who draws them?) / no / later
+## Decisions (2026-09-27)
+- [x] Accent colour → forest green `#2F5D50`
+- [x] Heading font → Newsreader
+- [x] Background → `#FFFFFF`, text `#1A1A1A` (matching tanqinghua.asia)
+- [x] Hand-drawn doodles → **yes**, drawn by owner → plan in [DOODLES.md](DOODLES.md)
