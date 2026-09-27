@@ -1,7 +1,7 @@
 # Hafiz Yunus: Personal Website
 
 Portfolio of a mechanical engineer: experience, projects, and more depth than fits on a resume.
-Will be live at **https://hafizyunus.github.io** (GitHub Pages). Built with [Astro](https://astro.build).
+Live at **https://hafizyunus.github.io** (GitHub Pages). Built with [Astro](https://astro.build).
 
 ## Editing content
 Everything you normally change is in [`content/`](content/). No code needed.

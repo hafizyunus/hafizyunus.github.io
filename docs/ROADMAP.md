@@ -7,7 +7,7 @@
 - [x] Local git repo + `docs/`
 - [x] Hosting: GitHub Pages → [ADR 0002](decisions/0002-hosting-and-url.md)
 - [x] Choose URL → `https://hafizyunus.github.io` ([ADR 0002](decisions/0002-hosting-and-url.md))
-- [ ] Create GitHub repo `hafizyunus/hafizyunus.github.io` & push
+- [x] Create GitHub repo [`hafizyunus/hafizyunus.github.io`](https://github.com/hafizyunus/hafizyunus.github.io) & push; Pages set to "GitHub Actions"; live 2026-09-27
 - [x] Confirm stack → Astro ([ADR 0001](decisions/0001-tech-stack.md))
 - [x] Audience, tone, primary action → [BRIEF.md](BRIEF.md)
 - [x] Content model → [ARCHITECTURE.md](ARCHITECTURE.md) (one `work` collection for jobs/teams/projects)
@@ -74,3 +74,4 @@ See [features backlog](features/README.md) for the full idea list.
 | 2026-09-26 | Initial roadmap; GitHub Pages chosen, URL pending |
 | 2026-09-26 | Astro accepted; URL set to hafizyunus.github.io; `/resume` page added to Phase 1 |
 | 2026-09-27 | Design directive accepted; Astro project scaffolded; 7 work pages drafted from resume |
+| 2026-09-27 | GitHub repo created; first deploy live at https://hafizyunus.github.io (TODOs/doodles deferred) |
